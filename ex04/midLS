@@ -1,2 +1,2 @@
 #!/bin/sh
-ls -mtF | sed "s/, $//" | sed "s/*//g"
+ls -tmp

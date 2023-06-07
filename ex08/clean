@@ -1,2 +1,2 @@
 #!/bin/sh
-find . -name '*~' -o -name '#*#' -delete -print
+find . -type f \( -name '*~' -o -name '#*#' \) -delete -print
