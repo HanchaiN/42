@@ -13,8 +13,6 @@
 
 void	ft_print_numbers(void)
 {
-	const char	string[11] = "0123456789";
-
-	write(STDOUT_FILENO, &string, 11);
+	write(STDOUT_FILENO, "0123456789", 10);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:15:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/08 13:19:51 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/09 09:27:08 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -17,10 +17,8 @@ void	ft_putchar(char c)
 	return ;
 }
 
-void	_putnbr(int nb)
+void	_putnbr(long nb)
 {
-	char	digit;
-
 	if (nb == 0)
 		return ;
 	_putnbr(nb / 10);
@@ -36,12 +34,12 @@ void	ft_putnbr(int nb)
 	}
 	else if (nb > 0)
 	{
-		_putnbr(nb);
+		_putnbr((long)nb);
 	}
 	else
 	{
 		ft_putchar('-');
-		_putnbr(-nb);
+		_putnbr(-(long)nb);
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 10:11:58 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/08 13:19:39 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/09 09:28:10 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -47,7 +47,7 @@ void	_print_combn(t_state s_state, char *sep, int sep_size)
 
 void	ft_print_combn(int n)
 {
-	char	sep[10];
+	char	sep[12];
 	t_state	s_state;
 
 	sep[0] = ',';
