@@ -6,13 +6,13 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:06:14 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/10 16:29:56 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/10 17:36:35 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include<stdio.h>
 
-void	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	len;
 
