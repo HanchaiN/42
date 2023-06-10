@@ -6,9 +6,11 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:26:13 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/10 13:26:57 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/10 13:39:49 by tplaengm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void	ft_putchar(char c);
 
 void	rush(int x, int y)
 {
