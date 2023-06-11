@@ -6,20 +6,26 @@
 /*   By: tsongtra <tsongtra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:26:45 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/10 15:08:18 by tsongtra         ###   ########.fr       */
+/*   Updated: 2023/06/11 14:39:58 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	rush(int x, int y);
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int	val;
 	int	is_negative;
 
-	is_negative = *str == '-';
-	if (is_negative)
+	while (*str == ' ')
 		str++;
+	is_negative = 0;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			is_negative = !is_negative;
+		str++;
+	}
 	val = 0;
 	while ('0' <= *str && *str <= '9')
 	{
