@@ -6,29 +6,31 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 13:36:47 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/11 13:36:49 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/12 09:25:47 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
-	char			*dest_;
-	unsigned int	i;
+	unsigned int	count;
 
-	dest_ = dest;
-	i = 0;
-	while (*dest != '\0' && i < size)
+	count = 0;
+	while (*dest != '\0')
 	{
-		dest++;
-		i++;
+		if (i < size - 1)
+			dest++;
+		count++;
 	}
-	while (*src != '\0' && i < size)
+	while (*src != '\0')
 	{
-		*dest = *src;
+		if (count < size - 1)
+		{
+			*dest = *src;
+			dest++;
+		}
 		src++;
-		dest++;
-		i++;
+		count++;
 	}
 	*dest = '\0';
-	return (i);
+	return (count);
 }
