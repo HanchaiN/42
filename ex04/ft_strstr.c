@@ -6,11 +6,9 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 12:43:14 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/12 09:23:48 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/12 10:47:50 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#define NULL 0
 
 char	*ft_strstr(char *str, char *to_find)
 {
@@ -32,5 +30,5 @@ char	*ft_strstr(char *str, char *to_find)
 			return (begin);
 		begin++;
 	}
-	return (NULL);
+	return (0);
 }
