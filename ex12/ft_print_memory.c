@@ -6,14 +6,14 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 08:47:53 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/12 12:01:59 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:45:50 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #define LINE_LEN 16
 
-void	_write_hex(unsigned int value, int count)
+void	_write_hex(unsigned long long value, int count)
 {
 	const char		digits[] = "0123456789abcdef";
 
@@ -49,7 +49,7 @@ void	_print_hex_line(void *addr, unsigned int size)
 		if (i >= size)
 			write(STDOUT_FILENO, "  ", 2);
 		else
-			_write_hex(*(unsigned int *) addr, 2);
+			_write_hex(*(unsigned long long *) addr, 2);
 		if (j % 2 == 1)
 			write(STDOUT_FILENO, " ", 1);
 		i++;
@@ -86,8 +86,9 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	i = 0;
 	while (i < size)
 	{
-		_write_hex((unsigned int)(addr + i), 16);
+		_write_hex((unsigned long long)(addr + i), 16);
 		write(STDOUT_FILENO, ": ", 2);
+
 		_print_hex_line(addr + i, size - i);
 		_print_str_line(addr + i, size - i);
 		write(STDOUT_FILENO, "\n", 1);
