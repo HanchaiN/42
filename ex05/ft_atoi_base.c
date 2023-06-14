@@ -6,7 +6,7 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:14:54 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/11 15:34:41 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/14 09:55:22 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,21 @@ int	_findch(char *str, char ch)
 	return (-1);
 }
 
+int	is_whitespace(char c)
+{
+	return (
+		c == '\t'
+		|| c == '\n'
+		|| c == '\v'
+		|| c == '\f'
+		|| c == '\r'
+		|| c == ' '
+	);
+}
+
 char	*_is_negative(char *str, int *is_negative)
 {
-	while (*str == ' ')
+	while (is_whitespace(*str))
 		str++;
 	*is_negative = 0;
 	while (*str == '-' || *str == '+')
