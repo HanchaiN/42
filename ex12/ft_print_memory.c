@@ -6,7 +6,7 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 08:47:53 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/12 09:14:32 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/12 12:01:59 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,4 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		i += LINE_LEN;
 	}
 	return (addr);
-}
-
-int	main(void)
-{
-	const char mem[] = "Bonjour lws aminches\011\001\011c\007 est fou\011tout\011ce qu on peut faire avec\x09\x0a\x09print_memory\x0a\x0a\x0a\x09lol.lol\x0a ";
-
-	ft_print_memory((void *)&mem, sizeof(mem)/sizeof(char));
-	return (0);
 }
