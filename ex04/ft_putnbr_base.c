@@ -6,7 +6,7 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:24:55 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/14 09:57:08 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:04:30 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_putnbr_base(int nbr, char *base)
 	else
 	{
 		ft_putchar('-');
-		_putnbr_base(-nbr, radix, base);
+		_putnbr_base(nbr, radix, base);
 	}
 	return ;
 }
