@@ -6,7 +6,7 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 08:47:53 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/14 11:45:50 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/15 14:36:19 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	{
 		_write_hex((unsigned long long)(addr + i), 16);
 		write(STDOUT_FILENO, ": ", 2);
-
 		_print_hex_line(addr + i, size - i);
 		_print_str_line(addr + i, size - i);
 		write(STDOUT_FILENO, "\n", 1);
