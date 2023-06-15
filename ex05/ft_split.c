@@ -6,9 +6,11 @@
 /*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 09:11:11 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/15 09:54:15 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/15 12:02:22 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 unsigned int	ft_strlen(char *str)
 {
