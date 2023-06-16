@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 09:15:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/11 14:14:22 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:54:16 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -42,7 +42,7 @@ void	ft_putnbr(int nb)
 	else
 	{
 		ft_putchar('-');
-		_putnbr(-nb);
+		_putnbr(nb);
 	}
 	return ;
 }
