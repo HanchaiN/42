@@ -1,0 +1,76 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int	get(int ***a, char *inp)
+{
+	int	i;
+	int	j;
+	int	c;
+
+	i = 0;
+	j = 0;
+	while (inp[i])
+	{
+		if ((inp[i] < '0' || inp[i] > '9') && (inp[i] != ' '))
+			return (-1);
+		if (inp[i] > '0' && inp[i] <= '9')
+			j++;
+		i++;
+	}
+	if (j % 4 != 0 || j == 0)
+	{
+		return (-2) ;
+	}
+	j /= 4;
+	i = 0;
+	*a = (int **)malloc(4 * sizeof(int *));
+	printf("%s\n", inp);
+	while (i < 4)
+	{
+		c = 0;
+		(*a)[i] = (int *)malloc(j * sizeof (int));
+		while(c < j)
+		{
+			printf("%c", *inp);
+			if (*inp >= '0' && *inp <= '9')
+			{
+				(*a)[i][c] = *inp - '0';
+				c++;
+			}
+			inp++;
+		}
+		i++;
+	}
+	printf("\n");
+	return (j);
+}
+
+int	print_error(int code)
+{
+	write(1, "Error\n", 6);
+	printf("%d\n", code);
+	return (code);
+}
+
+int	main(int argc, char **argv)
+{
+	int	**a;
+	int	n;
+
+	if (argc != 2)
+		return (print_error(0));
+	a = NULL;
+	n = get(&a, argv[1]);
+	if (n < 0)
+	{
+		return (print_error(n));
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		for(int j = 0; j < n; j++)
+			printf("%d ", a[i][j]);
+		printf("\n");
+	}
+	return (0);
+}
