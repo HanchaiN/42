@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:39:38 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:45:38 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:55:17 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_SKYSCRAPER_H
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct s_constraint
 {

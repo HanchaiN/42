@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:13:23 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:45:42 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:59:43 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,41 @@
 int	print_error(int code)
 {
 	write(1, "Error\n", 6);
-	printf("%d\n", code);
-	fflush(stdout);
 	return (code);
 }
 
-//TODO: implement w/o printf
-void	print_board(int n, int **board)
+void	ft_putchar(char c)
 {
-	for(int i = 0; i < n; i++)
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *str)
+{
+	while (*str)
 	{
-		for(int j=0; j<n; j++)
-			printf("%d ", board[i][j]);
-		printf("\n");
+		write(1, str, 1);
+		str++;
 	}
 }
 
-void	print_column(const t_column *col)
+
+void	print_board(int n, int **board)
 {
-	for(int i=0; i<col->n; i++)
-		printf("%d ", *col->height[i]);
-	printf("\n");
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < n)
+	{
+		j = 0;
+		while (j < n)
+		{
+			ft_putchar(board[i][j] + '0');
+			if (j != n - 1)
+				ft_putchar(' ');
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
 }
