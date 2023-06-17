@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:13:23 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 13:46:01 by ppruetti         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:09:07 by ppruetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_board(int n, int **board)
 				str_write(" ");
 			jndex++;
 		}
-		if (index != n - 1)
+		if (index != n -1)
 			str_write("\n");
 		index++;
 	}
