@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:54:21 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 09:44:47 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:29:00 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ const char	*_parse_int(const char *inp, const int size, int **tab)
 	int	i;
 
 	*tab = (int *)malloc(size * sizeof(int));
+	if (*tab == NULL)
+		return (inp);
 	i = 0;
 	while (i < size)
 	{
@@ -50,11 +52,24 @@ int	_get_size(const char *inp)
 	return (argc / 4);
 }
 
-void	parse_constraint(t_constraint *constraint, const char *inp)
+int	parse_constraint(t_constraint *constraint, const char *inp)
 {
+	if (constraint == NULL)
+		return (0);
 	constraint->n = _get_size(inp);
+	if (constraint->n <= 0)
+		return (0);
 	inp = _parse_int(inp, constraint->n, &constraint->top);
+	if (constraint -> top == NULL)
+		return (0);
 	inp = _parse_int(inp, constraint->n, &constraint->bottom);
+	if (constraint -> bottom == NULL)
+		return (0);
 	inp = _parse_int(inp, constraint->n, &constraint->left);
+	if (constraint -> left == NULL)
+		return (0);
 	inp = _parse_int(inp, constraint->n, &constraint->right);
+	if (constraint -> right == NULL)
+		return (0);
+	return (1);
 }
