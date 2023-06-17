@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:34:52 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:53:15 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:24:05 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	_backtrack(const t_constraint *constraint, t_state *state)
 			return (1);
 		height++;
 	}
+	state -> height[state -> i][state -> j] = 0;
 	_prev_state(constraint, state);
 	return (0);
 }
