@@ -1,86 +1,81 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skyscraper_cleanup.c                            :+:      :+:    :+:   */
+/*   ft_skyscraper_malloc.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:26:15 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/16 15:47:36 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 10:03:55 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_skyscraper.h"
 
-void	free_input(t_input data)
+void	init_column(t_column *col, int n, int l_count, int r_count)
 {
-	free(data.top);
-	free(data.bottom);
-	free(data.left);
-	free(data.right);
+	col->n = n;
+	col->height = (int **) malloc(n * sizeof(int *));
+	col->l_count = l_count;
+	col->r_count = r_count;
 }
 
-int	**malloc2d(int x, int y)
+void	free_column(t_column *col)
 {
-	int	**arr;
-	int	i;
-	int	j;
+	free(col->height);
+}
 
-	arr = (int **) malloc(x * sizeof(int *));
+void	init_state(t_state *state, const t_constraint *constraint)
+{
+	int		i;
+	int		j;
+
+	state->height = malloc2d(constraint->n, constraint->n);
+	state->i = 0;
+	state->j = -1;
+	state->col = (t_column *) malloc(constraint->n * sizeof(t_column));
+	state->row = (t_column *) malloc(constraint->n * sizeof(t_column));
 	i = 0;
-	while (i < x)
+	while (i < constraint->n)
 	{
-		arr[i] = (int *) malloc(y * sizeof(int));
+		init_column(&state->col[i], constraint->n,
+			constraint->left[i], constraint->right[i]);
 		j = 0;
-		while (j < y)
+		while (j < constraint->n)
 		{
-			arr[i][j] = 0;
+			if (i == 0)
+				init_column(&state->row[j], constraint->n,
+					constraint->top[j], constraint->bottom[j]);
+			state->col[i].height[j] = &state->height[i][j];
+			state->row[j].height[i] = &state->height[i][j];
 			j++;
 		}
 		i++;
 	}
-	return (arr);
 }
 
-int	*get_row(int **arr, int x, int j)
+void	free_state(t_state *state, const t_constraint *constraint)
 {
-	int	*tab;
 	int	i;
 
-	tab = (int *) malloc(x * sizeof(int));
 	i = 0;
-	while (i < x)
+	while (i < constraint->n)
 	{
-		tab[i] = arr[i][j];
+		free_column(&state->col[i]);
+		free_column(&state->row[i]);
 		i++;
 	}
-	return (tab);
+	free(state->col);
+	free(state->row);
+	free2d(state->height, constraint->n, constraint->n);
+	free(state);
 }
 
-int	*rev_arr(int *arr, int size)
+void	free_constraint(t_constraint *data)
 {
-	int	*tab;
-	int	i;
-
-	tab = (int *) malloc(size * sizeof(int));
-	i = 0;
-	while (i < size)
-	{
-		tab[i] = arr[size - i - 1];
-	}
-	return (tab);
-}
-
-void	free2d(int **arr, int x, int y)
-{
-	int	i;
-
-	(void)y;
-	i = 0;
-	while (i < x)
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
+	free(data -> top);
+	free(data -> bottom);
+	free(data -> left);
+	free(data -> right);
+	free(data);
 }

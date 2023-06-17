@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skyscraper_checker.c                            :+:      :+:    :+:   */
+/*   ft_skyscraper_validator.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:33:28 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/16 16:05:37 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 09:43:42 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	_is_valid_column(int index, t_column *column)
 	i = 0;
 	while (i < index)
 	{
-		if (column->height[i] == column->height[index])
+		if (*column->height[i] == *column->height[index])
 			return (0);
 		i++;
 	}
@@ -60,24 +60,11 @@ int	_is_valid_column(int index, t_column *column)
 }
 
 //TODO: fix
-int	is_valid(const t_input *constraint, t_state *state)
+int	is_valid(const t_constraint *constraint, t_state *state)
 {
-	t_column	column;
-
-	column.n = constraint->n;
-	column.l_count = constraint->left[state->i];
-	column.r_count = constraint->right[state->i];
-	column.height = state->height[state->i];
-	if (!_is_valid_column(state->j, &column))
+	if (!_is_valid_column(state->j, &state->col[state->i]))
 		return (0);
-	column.l_count = constraint->top[state->j];
-	column.r_count = constraint->bottom[state->j];
-	column.height = get_row(state->height, constraint->n, state->j);
-	if (!_is_valid_column(state->i, &column))
-	{
-		free(column.height);
+	if (!_is_valid_column(state->i, &state->row[state->j]))
 		return (0);
-	}
-	free(column.height);
 	return (1);
 }

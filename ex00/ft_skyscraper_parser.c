@@ -6,13 +6,13 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:54:21 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/16 15:51:42 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 09:44:47 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_skyscraper.h"
 
-char	*_parse_int(char *inp, int size, int **tab)
+const char	*_parse_int(const char *inp, const int size, int **tab)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ char	*_parse_int(char *inp, int size, int **tab)
 	return (inp);
 }
 
-int	_get_size(char *inp)
+int	_get_size(const char *inp)
 {
 	int		argc;
 
@@ -50,14 +50,11 @@ int	_get_size(char *inp)
 	return (argc / 4);
 }
 
-t_input	parse_input(char *inp)
+void	parse_constraint(t_constraint *constraint, const char *inp)
 {
-	t_input	data;
-
-	data.n = _get_size(inp);
-	inp = _parse_int(inp, data.n, &data.top);
-	inp = _parse_int(inp, data.n, &data.bottom);
-	inp = _parse_int(inp, data.n, &data.left);
-	inp = _parse_int(inp, data.n, &data.right);
-	return (data);
+	constraint->n = _get_size(inp);
+	inp = _parse_int(inp, constraint->n, &constraint->top);
+	inp = _parse_int(inp, constraint->n, &constraint->bottom);
+	inp = _parse_int(inp, constraint->n, &constraint->left);
+	inp = _parse_int(inp, constraint->n, &constraint->right);
 }
