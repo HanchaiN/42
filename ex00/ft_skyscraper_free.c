@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:26:15 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:09:17 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:25:23 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	free_constraint(t_constraint *constraint)
 {
 	if (constraint == NULL)
 		return ;
-	if (constraint -> top)
-		free(constraint -> top);
-	if (constraint -> bottom)
-		free(constraint -> bottom);
-	if (constraint -> left)
-		free(constraint -> left);
-	if (constraint -> right)
-		free(constraint -> right);
+	if (constraint->top)
+		free(constraint->top);
+	if (constraint->bottom)
+		free(constraint->bottom);
+	if (constraint->left)
+		free(constraint->left);
+	if (constraint->right)
+		free(constraint->right);
 	free(constraint);
 }

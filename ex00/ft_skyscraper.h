@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:39:38 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 15:55:17 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:57:37 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef struct s_range
 
 int		**malloc2d(int x, int y);
 void	free2d(int **arr, int x, int y);
-int		*get_row(int **arr, int x, int j);
+int		is_in_range(const int value, const t_range range);
+int		count_1s(int binary);
 int		*rev_arr(int *arr, int size);
 int		init_state(t_state *state, const t_constraint *constraint);
 void	free_state(t_state *state, const t_constraint *constraint);

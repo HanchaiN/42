@@ -6,16 +6,11 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:33:28 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:54:07 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:58:33 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_skyscraper.h"
-
-int	_is_in_range(const int value, const t_range range)
-{
-	return (range.min <= value && value <= range.max);
-}
 
 t_range	_get_count_range_left(int index, const t_column *column)
 {
@@ -42,25 +37,31 @@ t_range	_get_count_range_left(int index, const t_column *column)
 	return (count_range);
 }
 
-int	_get_count_right(const t_column *column)
+t_range	_get_count_range_right(int index, const t_column *column)
 {
-	int	count;
-	int	max_height;
-	int	i;
+	t_range	count_range;
+	int		max_height;
+	int		heightmap;
+	int		i;
 
-	count = 0;
-	max_height = 0;
-	i = column->n - 1;
-	while (i >= 0)
+	count_range.min = 0;
+	heightmap = (1 << column->n) - 1;
+	max_height = 1 << (column->n - 1);
+	i = 0;
+	while (i <= index)
 	{
-		if (*column->height[i] > max_height)
-		{
-			max_height = *column->height[i];
-			count++;
-		}
-		i--;
+		heightmap ^= (1 << (*column->height[i] - 1));
+		if (!(heightmap & max_height))
+			count_range.min++;
+		while (heightmap && !(heightmap & max_height))
+			max_height >>= 1;
+		i++;
 	}
-	return (count);
+	count_range.max = count_range.min;
+	if (heightmap)
+		count_range.min++;
+	count_range.max += count_1s(heightmap);
+	return (count_range);
 }
 
 int	_is_valid_column(int index, const t_column *column)
@@ -74,14 +75,13 @@ int	_is_valid_column(int index, const t_column *column)
 			return (0);
 		i++;
 	}
-	if (!_is_in_range(column->l_count, _get_count_range_left(index, column)))
+	if (!is_in_range(column->l_count, _get_count_range_left(index, column)))
 		return (0);
-	if (index == column->n - 1 && _get_count_right(column) != column->r_count)
+	if (!is_in_range(column->r_count, _get_count_range_right(index, column)))
 		return (0);
 	return (1);
 }
 
-//TODO: fix
 int	is_valid(t_state *state)
 {
 	if (!_is_valid_column(state->j, &state->col[state->i]))

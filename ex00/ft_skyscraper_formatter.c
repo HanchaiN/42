@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:13:23 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 15:59:43 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:57:51 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_putstr(char *str)
 		str++;
 	}
 }
-
 
 void	print_board(int n, int **board)
 {

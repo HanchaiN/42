@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skyscraper_array.c                              :+:      :+:    :+:   */
+/*   ft_skyscraper_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 09:02:30 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 11:25:07 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:57:55 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,31 +48,20 @@ void	free2d(int **arr, int x, int y)
 	free(arr);
 }
 
-int	*get_row(int **arr, int x, int j)
+int	is_in_range(const int value, const t_range range)
 {
-	int	*tab;
-	int	i;
-
-	tab = (int *) malloc(x * sizeof(int));
-	i = 0;
-	while (i < x)
-	{
-		tab[i] = arr[i][j];
-		i++;
-	}
-	return (tab);
+	return (range.min <= value && value <= range.max);
 }
 
-int	*rev_arr(int *arr, int size)
+int	count_1s(int binary)
 {
-	int	*tab;
-	int	i;
+	int	count;
 
-	tab = (int *) malloc(size * sizeof(int));
-	i = 0;
-	while (i < size)
+	count = 0;
+	while (binary)
 	{
-		tab[i] = arr[size - i - 1];
+		count += (binary & 1);
+		binary >>= 1;
 	}
-	return (tab);
+	return (count);
 }
