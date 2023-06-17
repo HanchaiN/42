@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:13:23 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/16 16:04:16 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:24:53 by ppruetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	print_error(int code)
 }
 
 //TODO: implement w/o printf
-void	print_board(int n, int **board)
+void	print_board(int h, int **board)
 {
-	for(int i = 0; i < n; i++)
+	for(int i = 0; i < h; i++)
 	{
-		for(int j=0; j<n; j++)
+		for(int j=0; j<h; j++)
 			printf("%d ", board[i][j]);
 		printf("\n");
 	}
