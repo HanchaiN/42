@@ -22,10 +22,16 @@ const char	*_parse_int(const char *inp, const int size, int **tab)
 	i = 0;
 	while (i < size)
 	{
-		if (*tab && '0' <= *inp && *inp <= '9')
+		if (*tab && '1' <= *inp && *inp <= size + '0')
 		{
 			(*tab)[i] = *inp - '0';
 			i++;
+		}
+		else if (*inp != ' ')
+		{
+			free(*tab);
+			*tab = NULL;
+			return (inp);
 		}
 		inp++;
 	}
