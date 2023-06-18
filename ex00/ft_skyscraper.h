@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:39:38 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 17:57:37 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/18 12:29:59 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int		**malloc2d(int x, int y);
 void	free2d(int **arr, int x, int y);
 int		is_in_range(const int value, const t_range range);
 int		count_1s(int binary);
-int		*rev_arr(int *arr, int size);
+void	freeze_state(t_state *state, const t_constraint *constraint);
+void	unfreeze_state(t_state *state, const t_constraint *constraint);
 int		init_state(t_state *state, const t_constraint *constraint);
 void	free_state(t_state *state, const t_constraint *constraint);
 int		parse_constraint(t_constraint *constraint, const char *inp);
@@ -59,7 +60,6 @@ void	free_constraint(t_constraint *constraint);
 int		is_valid(t_state *state);
 t_state	*find_solution(const t_constraint *constraint);
 void	print_board(int n, int **board);
-void	print_column(const t_column *col);
 int		print_error(int code);
 
 #endif
