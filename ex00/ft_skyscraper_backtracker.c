@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:34:52 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/18 12:25:18 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:25:23 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int	_backtrack(const t_constraint *constraint, t_state *state)
 {
 	int	height;
 
-	while (state->height[state->i][state->j] <= 0)
-		if (!_next_state(constraint, state))
-			return (1);
+	if (!_next_state(constraint, state))
+		return (1);
 	height = 1;
 	while (height <= constraint->n)
 	{

@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:26:15 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/18 12:27:44 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:24:43 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	init_state(t_state *state, const t_constraint *constraint)
 {
 	state->height = malloc2d(constraint->n, constraint->n);
 	state->i = 0;
-	state->j = 0;
+	state->j = -1;
 	state->col = (t_column *) malloc(constraint->n * sizeof(t_column));
 	state->row = (t_column *) malloc(constraint->n * sizeof(t_column));
 	if (state->col == NULL || state->row == NULL)
@@ -61,42 +61,4 @@ int	init_state(t_state *state, const t_constraint *constraint)
 	if (!_link_columns(state, constraint))
 		return (0);
 	return (1);
-}
-
-void	freeze_state(t_state *state, const t_constraint *constraint)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < constraint->n)
-	{
-		j = 0;
-		while (j < constraint->n)
-		{
-			if (state->height[i][j] > 0)
-				state->height[i][j] *= -1;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	unfreeze_state(t_state *state, const t_constraint *constraint)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < constraint->n)
-	{
-		j = 0;
-		while (j < constraint->n)
-		{
-			if (state->height[i][j] < 0)
-				state->height[i][j] *= -1;
-			j++;
-		}
-		i++;
-	}
 }
