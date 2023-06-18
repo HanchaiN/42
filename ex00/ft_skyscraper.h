@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:39:38 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/18 14:46:43 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:36:57 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		get_count_right(int *column, int n);
 t_range	get_count_range_left(int index, const t_column *column);
 t_range	get_count_range_right(int index, const t_column *column);
 int		is_valid(t_state *state);
-int		eliminate(t_state *state, int n);
+int		eliminate(t_state *state);
 int		backtrack(t_state *state);
 int		find_solution(t_state *state);
 void	print_board(int n, int **board);

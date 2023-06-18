@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 12:40:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/18 14:46:43 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:38:30 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 
 void	filter(t_column *col, int i, int value)
 {
-	(void) col;
-	(void) i;
-	(void) value;
-	return ;
+	int	*perm;
+	int	j;
+
+	j = 0;
+	while (j < col->possible_size)
+	{
+		perm = get_perm(col->n, col->possible[j]);
+		if (perm[i] != value)
+			col->possible[j] = col->possible[--col->possible_size];
+		else
+			j++;
+		free(perm);
+	}
 }
 
-void	cross_check(t_column *cols, t_column *rows)
+void	cross_check(t_state *state)
 {
-	(void) cols;
-	(void) rows;
+	(void) state;
 	return ;
 }
 
@@ -42,7 +50,7 @@ void	set_perm(t_column *col, int i, t_column *rows)
 		filter(&rows[j], i, *col->height_ptr[j]);
 		j++;
 	}
-	return ;
+	free(perm);
 }
 
 int	eliminate_at(t_state *state, int i, int j)
@@ -54,8 +62,7 @@ int	eliminate_at(t_state *state, int i, int j)
 	if (state->col[j].possible_size == 1)
 	{
 		set_perm(&state->col[j], j, state->rows);
-		cross_check(state->col, state->rows);
-		cross_check(state->rows, state->col);
+		cross_check(state);
 		return (1);
 	}
 	if (state->rows[i].possible_size == 0)
@@ -63,14 +70,13 @@ int	eliminate_at(t_state *state, int i, int j)
 	if (state->rows[i].possible_size == 1)
 	{
 		set_perm(&state->rows[i], i, state->col);
-		cross_check(state->rows, state->col);
-		cross_check(state->col, state->rows);
+		cross_check(state);
 		return (1);
 	}
 	return (0);
 }
 
-int	eliminate(t_state *state, int n)
+int	eliminate(t_state *state)
 {
 	int	i;
 	int	j;
@@ -79,10 +85,10 @@ int	eliminate(t_state *state, int n)
 
 	changed = 0;
 	i = 0;
-	while (i < n)
+	while (i < state->n)
 	{
 		j = 0;
-		while (j < n)
+		while (j < state->n)
 		{
 			status = eliminate_at(state, i, j);
 			if (status == 1)

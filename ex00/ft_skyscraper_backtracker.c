@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 14:34:52 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/18 15:12:48 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:36:22 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ int	backtrack(t_state *state)
 		if (backtrack(state))
 			return (1);
 		else
-		{
-			_prev_state(state);
-			return (0);
-		}
+			return (0 * _prev_state(state));
 	}
 	height = 1;
 	while (height <= state->n)
