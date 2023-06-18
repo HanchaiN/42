@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 09:02:30 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/17 17:57:55 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/18 12:56:21 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,11 @@ int	count_1s(int binary)
 		binary >>= 1;
 	}
 	return (count);
+}
+
+int	factorial(int n)
+{
+	if (n <= 0)
+		return (1);
+	return (n * factorial(n - 1));
 }
