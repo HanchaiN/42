@@ -22,10 +22,16 @@ const char	*_parse_int(const char *inp, const int size, int **tab)
 	i = 0;
 	while (i < size)
 	{
-		if (*tab && '0' <= *inp && *inp <= '9')
+		if (*tab && '1' <= *inp && *inp <= size + '0')
 		{
 			(*tab)[i] = *inp - '0';
 			i++;
+		}
+		else if (*inp != ' ')
+		{
+			free(*tab);
+			*tab = NULL;
+			return (inp);
 		}
 		inp++;
 	}
@@ -34,16 +40,18 @@ const char	*_parse_int(const char *inp, const int size, int **tab)
 
 int	_get_size(const char *inp)
 {
-	int		argc;
+	int	argc;
+	int	i;
 
 	argc = 0;
-	while (*inp)
+	i = 0;
+	while (inp[i])
 	{
-		if ('1' <= *inp && *inp <= '9')
+		if ('1' <= inp[i] && inp[i] <= '9' && i % 2 == 0)
 			argc++;
-		else if (*inp != ' ')
+		else if (inp[i] != ' ' || i % 2 != 1)
 			return (0);
-		inp++;
+		i++;
 	}
 	if (argc % 4 != 0 || argc == 0)
 	{
