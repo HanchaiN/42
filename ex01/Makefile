@@ -7,16 +7,20 @@ SOURCES = srcs/ft_putchar.c \
 		  srcs/ft_putstr.c \
 		  srcs/ft_strlen.c \
 		  srcs/ft_strcmp.c
-INCLUDES = includes/ft.h
+INCLUDE_DIR = includes/
 OBJECTS = $(SOURCES:.c=.o)
 OUTPUT = libft.a
+
+.PHONY: all re fclean clean
 all: $(OUTPUT)
 
 $(OUTPUT): $(OBJECTS)
 	$(AR) $(ARFLAGS) $(OUTPUT) $(OBJECTS)
 
-$(OBJECTS):
-	$(CC) -c $(CFLAGS) -I $(INCLUDES) -o $@ $(@:.o=.c)
+$(OBJECTS): $(@:.o=.c)
+	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $(@:.o=.c)
+
+$(SOURCES):
 
 re: fclean all
 
