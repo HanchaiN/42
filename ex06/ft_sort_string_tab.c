@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_string_tab.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:46:12 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/19 14:41:11 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:29:33 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ void	ft_sort_string_tab(char **tab)
 		{
 			temp = *tab;
 			*tab = *curr;
-	 		*curr = temp;
+			*curr = temp;
 		}
 		curr++;
 	}
 	ft_sort_string_tab(tab + 1);
 	return ;
 }
-
