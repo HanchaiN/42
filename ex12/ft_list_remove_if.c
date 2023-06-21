@@ -6,11 +6,12 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:21:32 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/20 13:40:19 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/21 09:49:04 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
+#include <stdlib.h>
 
 void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(),
 			void (*free_fct)(void *))
