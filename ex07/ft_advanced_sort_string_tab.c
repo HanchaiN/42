@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:46:12 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/20 15:29:55 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:03:44 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@ void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 	char	*temp;
 	char	**curr;
 
-	if (tab == 0)
+	if (!*tab)
 		return ;
 	curr = tab;
-	while (curr != 0)
+	while (*curr)
 	{
 		if ((*cmp)(*tab, *curr) < 0)
 		{
