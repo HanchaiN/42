@@ -34,7 +34,7 @@ void	ft_sort_string_tab(char **tab)
 	curr = tab;
 	while (*curr)
 	{
-		if (ft_strcmp(*tab, *curr) < 0)
+		if (ft_strcmp(*tab, *curr) > 0)
 		{
 			temp = *tab;
 			*tab = *curr;
