@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/20 10:49:02 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:54:41 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ void	ft_putstr(char *str, int fileno)
 int	ft_display(int fileno)
 {
 	int		read_count;
-	char	buffer[16];
+	char	buffer[32767];
 
-	read_count = read(fileno, buffer, 16);
+	read_count = read(fileno, buffer, 32767);
 	while (read_count > 0)
 	{
 		write(STDOUT_FILENO, buffer, read_count);
-		read_count = read(fileno, buffer, 16);
+		read_count = read(fileno, buffer, 32767);
 	}
 	if (read_count < 0)
 		return (errno);
@@ -51,13 +51,27 @@ int	ft_display_file(char *pathname)
 	return (status);
 }
 
-int	ft_cat(int argc, char **argv)
+void	ft_display_error(char *program_name, char *pathname, int status)
+{
+	if (!status)
+		return ;
+	ft_putstr(program_name, STDERR_FILENO);
+	ft_putstr(": ", STDERR_FILENO);
+	ft_putstr(basename(pathname), STDERR_FILENO);
+	ft_putstr(": ", STDERR_FILENO);
+	ft_putstr(strerror(status), STDERR_FILENO);
+	ft_putstr("\n", STDERR_FILENO);
+}
+
+int	main(int argc, char **argv)
 {
 	int	i;
 	int	status;
+	int	ret;
 
 	if (argc == 1)
 		return (ft_display(STDIN_FILENO));
+	ret = 0;
 	i = 1;
 	while (i < argc)
 	{
@@ -65,24 +79,10 @@ int	ft_cat(int argc, char **argv)
 			status = ft_display(STDIN_FILENO);
 		else
 			status = ft_display_file(argv[i]);
+		ft_display_error(argv[0], argv[i], status);
 		if (status)
-		{
-			ft_putstr("ft_cat: ", STDERR_FILENO);
-			ft_putstr(basename(argv[i]), STDERR_FILENO);
-			ft_putstr(": ", STDERR_FILENO);
-			return (status);
-		}
+			ret = 1;
 		i++;
 	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	int	status;
-
-	status = ft_cat(argc, argv);
-	if (status)
-		ft_putstr(strerror(status), STDERR_FILENO);
-	return (status);
+	return (ret);
 }
