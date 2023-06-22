@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 13:32:55 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/15 12:01:06 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:37:03 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 
 	radix = _strlen(base_to);
 	is_negative = _atoi_base(nbr, base_from, &value);
+	is_negative &= value != 0;
 	if (radix < 0 || is_negative < 0)
 		return (NULL);
 	str = base_to;
