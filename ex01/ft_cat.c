@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <nonpras@student.42bangkok.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 10:54:41 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:35:52 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_display_error(char *program_name, char *pathname, int status)
 {
 	if (!status)
 		return ;
-	ft_putstr(program_name, STDERR_FILENO);
+	ft_putstr(basename(program_name), STDERR_FILENO);
 	ft_putstr(": ", STDERR_FILENO);
 	ft_putstr(basename(pathname), STDERR_FILENO);
 	ft_putstr(": ", STDERR_FILENO);

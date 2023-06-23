@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tail_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <nonpras@student.42bangkok.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:14:54 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 10:57:00 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:36:06 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_display_error_errno(char *program_name, char *pathname, int status)
 {
 	if (!status)
 		return ;
-	ft_putstr(program_name, STDERR_FILENO);
+	ft_putstr(basename(program_name), STDERR_FILENO);
 	ft_putstr(": ", STDERR_FILENO);
 	ft_putstr(basename(pathname), STDERR_FILENO);
 	ft_putstr(": ", STDERR_FILENO);
@@ -29,7 +29,7 @@ void	ft_display_error_errno(char *program_name, char *pathname, int status)
 
 void	ft_display_error_offset(char *program_name, char *offset)
 {
-	ft_putstr(program_name, STDERR_FILENO);
+	ft_putstr(basename(program_name), STDERR_FILENO);
 	ft_putstr(": illegal offset -- ", STDERR_FILENO);
 	ft_putstr(offset, STDERR_FILENO);
 	ft_putstr("\n", STDERR_FILENO);
