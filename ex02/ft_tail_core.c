@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tail_core.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 11:06:34 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:35:21 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_tail(int fileno, int byte_count)
 	int		read_count;
 	char	*buffer;
 
+	if (byte_count <= 0)
+		return (0);
 	buffer = (char *) malloc(byte_count * sizeof(char));
 	i = 0;
 	read_count = read(fileno, buffer + i % byte_count, 1);
