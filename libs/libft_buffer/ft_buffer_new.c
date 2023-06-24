@@ -6,12 +6,12 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:28:21 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:43:19 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_buffer.h"
-# include <stdlib.h>
+#include <stdlib.h>
 
 t_buffer	*ft_buffer_new(unsigned int capacity)
 {

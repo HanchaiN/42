@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:54:32 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:35:38 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:08:14 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int argc, char **argv)
 
 	(void) argc;
 	(void) argv;
-	buffer = ft_buffer_new(1);
-	ft_buffer_putstr("abcdefghijklmnopqrstuvwxyz", buffer);
+	buffer = ft_buffer_new(100);
+	ft_put_number(243, "", buffer);
 	ft_buffer_print(buffer);
 	ft_buffer_free(buffer);
 	return (0);
