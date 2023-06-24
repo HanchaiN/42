@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:50:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:05:21 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:53:01 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@
 char	*ft_get_value(unsigned int key, char *path);
 int		ft_put_value(unsigned int key, char *path, t_buffer *buffer);
 int		ft_put_number(unsigned int nbr, char *path, t_buffer *buffer);
+
+extern const char	*g_default_dict;
 
 #endif
