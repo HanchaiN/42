@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_buffer_new.c                                    :+:      :+:    :+:   */
+/*   ft_dict_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 14:36:08 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/24 15:14:15 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_buffer.h"
-#include <stdlib.h>
+#include "ft_dict.h"
+#define MYRIAD (10000)
 
-t_buffer	*ft_buffer_new(unsigned int capacity)
+const char	*g_default_dict = "./numbers.en.dict";
+
+int	ft_put_number(unsigned int nbr, char *path, t_buffer *buffer)
 {
-	t_buffer	*buffer;
-
-	if (capacity == 0)
-		capacity = 1;
-	buffer = (t_buffer *) malloc(sizeof(t_buffer));
-	buffer->capacity = capacity;
-	buffer->begin = (char *) malloc(buffer->capacity);
-	buffer->curr = buffer->begin;
-	*buffer->curr = 0;
-	return (buffer);
+	(void) nbr;
+	(void) path;
+	(void) buffer;
+	return (1);
 }
