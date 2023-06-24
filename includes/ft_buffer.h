@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict.h                                          :+:      :+:    :+:   */
+/*   ft_buffer.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:50:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:05:21 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:29:43 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_DICT_H
-# define FT_DICT_H
-# include "ft_buffer.h"
-# include <fcntl.h>
-# include <stdlib.h>
+#ifndef FT_BUFFER_H
+# define FT_BUFFER_H
 
-char	*ft_get_value(unsigned int key, char *path);
-int		ft_put_value(unsigned int key, char *path, t_buffer *buffer);
-int		ft_put_number(unsigned int nbr, char *path, t_buffer *buffer);
+typedef struct s_buffer
+{
+	char			*begin;
+	char			*curr;
+	unsigned int	capacity;
+}	t_buffer;
+
+t_buffer	*ft_buffer_new(unsigned int capacity);
+void		ft_buffer_free(t_buffer *buffer);
+void		ft_buffer_extend(t_buffer *buffer);
+void		ft_buffer_putchar(char ch, t_buffer *buffer);
+void		ft_buffer_putstr(char *str, t_buffer *buffer);
+void		ft_buffer_print(t_buffer *buffer);
 
 #endif

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict.h                                          :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/23 15:50:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:05:21 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/08 09:15:33 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/24 11:23:44 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_DICT_H
-# define FT_DICT_H
-# include "ft_buffer.h"
-# include <fcntl.h>
-# include <stdlib.h>
+#include "ft.h"
+#include <unistd.h>
 
-char	*ft_get_value(unsigned int key, char *path);
-int		ft_put_value(unsigned int key, char *path, t_buffer *buffer);
-int		ft_put_number(unsigned int nbr, char *path, t_buffer *buffer);
-
-#endif
+void	ft_putchar(char c)
+{
+	write(STDOUT_FILENO, &c, 1);
+}

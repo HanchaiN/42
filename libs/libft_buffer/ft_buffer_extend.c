@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dict.h                                          :+:      :+:    :+:   */
+/*   ft_buffer_extend.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/23 15:50:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:05:21 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/24 11:35:31 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_DICT_H
-# define FT_DICT_H
-# include "ft_buffer.h"
-# include <fcntl.h>
+#include "ft_buffer.h"
 # include <stdlib.h>
 
-char	*ft_get_value(unsigned int key, char *path);
-int		ft_put_value(unsigned int key, char *path, t_buffer *buffer);
-int		ft_put_number(unsigned int nbr, char *path, t_buffer *buffer);
+void	ft_buffer_extend(t_buffer *buffer)
+{
+	char	*str;
 
-#endif
+	str = buffer->begin;
+	buffer->capacity *= 2;
+	buffer->begin = (char *) malloc(buffer->capacity);
+	buffer->curr = buffer->begin;
+	ft_buffer_putstr(str, buffer);
+	free(str);
+}
