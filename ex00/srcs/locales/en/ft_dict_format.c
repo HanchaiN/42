@@ -18,8 +18,8 @@ const char	*g_default_dict = "./numbers.en.dict";
 
 int	ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer)
 {
-	(void) nbr;
-	(void) path;
-	(void) buffer;
+	(void)nbr;
+	(void)path;
+	(void)buffer;
 	return (1);
 }

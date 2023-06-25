@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/25 19:37:46 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/25 19:38:54 by hnonpras         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft.h"
 #include <ctype.h>
 
-int ft_isspace(char ch)
+int	ft_isspace(char ch)
 {
-    return (isspace(ch));
+	return (isspace(ch));
 }

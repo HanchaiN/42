@@ -19,9 +19,9 @@ t_buffer	*ft_buffer_new(unsigned int capacity)
 
 	if (capacity == 0)
 		capacity = 1;
-	buffer = (t_buffer *) malloc(sizeof(t_buffer));
+	buffer = (t_buffer *)malloc(sizeof(t_buffer));
 	buffer->capacity = capacity;
-	buffer->begin = (char *) malloc(buffer->capacity);
+	buffer->begin = (char *)malloc(buffer->capacity);
 	buffer->curr = buffer->begin;
 	*buffer->curr = 0;
 	return (buffer);

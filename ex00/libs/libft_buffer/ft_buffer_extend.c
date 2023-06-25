@@ -19,7 +19,7 @@ void	ft_buffer_extend(t_buffer *buffer)
 
 	str = buffer->begin;
 	buffer->capacity *= 2;
-	buffer->begin = (char *) malloc(buffer->capacity);
+	buffer->begin = (char *)malloc(buffer->capacity);
 	buffer->curr = buffer->begin;
 	ft_buffer_putstr(str, buffer);
 	free(str);

@@ -17,18 +17,18 @@
 
 t_entry	*ft_parse_entry(char *line)
 {
-    t_entry *entry;
+	t_entry	*entry;
 
-    entry = (t_entry *) malloc(sizeof(t_entry));
-    entry->key = ft_atoi_uint(line);
-    line = strchr(line, ':');
-    if (*line != ':')
-    {
-        free(entry);
-        return (NULL);
-    }
-    line++;
-    entry->value = ft_strtrim(line);
-    line++;
-    return (entry);
+	entry = (t_entry *)malloc(sizeof(t_entry));
+	entry->key = ft_atoi_uint(line);
+	line = strchr(line, ':');
+	if (*line != ':')
+	{
+		free(entry);
+		return (NULL);
+	}
+	line++;
+	entry->value = ft_strtrim(line);
+	line++;
+	return (entry);
 }

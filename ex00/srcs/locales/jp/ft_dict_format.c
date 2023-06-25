@@ -14,10 +14,10 @@
 #include "ft_dict.h"
 #define MYRIAD (10000)
 
-const char	*g_default_dict = "./numbers.jp.dict";
+const char			*g_default_dict = "./numbers.jp.dict";
 
-static int	_put_number_group(unsigned int nbr,
-			const char *path, t_buffer *buffer)
+static int	_put_number_group(unsigned int nbr, const char *path,
+		t_buffer *buffer)
 {
 	int	digit;
 	int	digit_value;
@@ -69,8 +69,7 @@ int	ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer)
 	digit_value = _get_group_value(nbr);
 	while (1)
 	{
-		status = _put_number_group((nbr / digit_value) % MYRIAD,
-				path, buffer);
+		status = _put_number_group((nbr / digit_value) % MYRIAD, path, buffer);
 		if (status < 0)
 			return (0);
 		if (status && digit_value > 1)

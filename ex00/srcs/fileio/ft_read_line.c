@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:14:07 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:14:47 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 19:33:00 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ char	*ft_read_line(int fileno)
 		read_count = read(fileno, &ch, 1);
 	}
 	str = ft_buffer_strdup(buffer);
-	free(buffer);
+	ft_buffer_free(buffer);
 	return (str);
 }

@@ -18,19 +18,19 @@
 
 int	main(int argc, char **argv)
 {
-	t_buffer	*buffer;
-	int			error_flag;
-	char		*str;
-	char		*dict_path;
-	unsigned int			nbr;
-	int read_count;
+	t_buffer		*buffer;
+	int				error_flag;
+	char			*str;
+	char			*dict_path;
+	unsigned int	nbr;
+	int				read_count;
 
 	error_flag = 0;
 	str = NULL;
-	dict_path = (char *) g_default_dict;
+	dict_path = (char *)g_default_dict;
 	if (argc == 1)
 	{
-		str = (char *) malloc(1024 * sizeof(char));
+		str = (char *)malloc(1024 * sizeof(char));
 		read_count = read(STDIN_FILENO, str, 1024);
 		if (str[read_count - 1] == '\n')
 			str[read_count - 1] = '\0';
@@ -57,5 +57,5 @@ int	main(int argc, char **argv)
 	else
 		ft_buffer_print(buffer);
 	ft_buffer_free(buffer);
-	return (0); 
+	return (0);
 }
