@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:54:32 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 15:02:17 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 17:55:16 by kkomasat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int	main(int argc, char **argv)
 
 	error_flag = 0;
 	str = NULL;
-	dict_path = (char *)g_default_dict;
+	dict_path = (char *) g_default_dict;
 	if (argc == 1)
 	{
-		str = (char *)malloc(1024 * sizeof(char));
+		str = (char *) malloc(1024 * sizeof(char));
 		read_count = read(STDIN_FILENO, str, 1024);
 		if (str[read_count - 1] == '\n')
 			str[read_count - 1] = '\0';
@@ -57,5 +57,5 @@ int	main(int argc, char **argv)
 	else
 		ft_buffer_print(buffer);
 	ft_buffer_free(buffer);
-	return (0);
+	return (0); 
 }
