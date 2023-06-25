@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 16:45:03 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:48:44 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 const char	*g_default_dict = "./numbers.jp.dict";
 
-int	_put_number_group(unsigned int nbr, const char *path, t_buffer *buffer)
+static int	_put_number_group(unsigned int nbr,
+			const char *path, t_buffer *buffer)
 {
 	int	digit;
 	int	digit_value;
@@ -44,7 +45,7 @@ int	_put_number_group(unsigned int nbr, const char *path, t_buffer *buffer)
 	return (1);
 }
 
-unsigned int	_get_group_value(unsigned int nbr)
+static unsigned int	_get_group_value(unsigned int nbr)
 {
 	unsigned int	digit_value;
 
