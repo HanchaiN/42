@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 15:03:32 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:48:44 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 const char	*g_default_dict = "./numbers.jp.dict";
 
-int	ft_put_number_group(unsigned int nbr, char *path, t_buffer *buffer)
+static int	_put_number_group(unsigned int nbr,
+			const char *path, t_buffer *buffer)
 {
 	int	digit;
 	int	digit_value;
@@ -44,7 +45,7 @@ int	ft_put_number_group(unsigned int nbr, char *path, t_buffer *buffer)
 	return (1);
 }
 
-unsigned int	ft_get_group_value(unsigned int nbr)
+static unsigned int	_get_group_value(unsigned int nbr)
 {
 	unsigned int	digit_value;
 
@@ -58,17 +59,17 @@ unsigned int	ft_get_group_value(unsigned int nbr)
 	return (digit_value);
 }
 
-int	ft_put_number(unsigned int nbr, char *path, t_buffer *buffer)
+int	ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer)
 {
 	unsigned int	digit_value;
 	int				status;
 
 	if (nbr == 0)
 		return (ft_put_value(nbr, path, buffer));
-	digit_value = ft_get_group_value(nbr);
+	digit_value = _get_group_value(nbr);
 	while (1)
 	{
-		status = ft_put_number_group((nbr / digit_value) % MYRIAD,
+		status = _put_number_group((nbr / digit_value) % MYRIAD,
 				path, buffer);
 		if (status < 0)
 			return (0);

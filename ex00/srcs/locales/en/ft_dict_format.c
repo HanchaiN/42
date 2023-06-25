@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 15:14:15 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:44:15 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 const char	*g_default_dict = "./numbers.en.dict";
 
-int	ft_put_number(unsigned int nbr, char *path, t_buffer *buffer)
+int	ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer)
 {
 	(void) nbr;
 	(void) path;
