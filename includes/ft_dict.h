@@ -16,7 +16,14 @@
 # include <fcntl.h>
 # include <stdlib.h>
 
+typedef struct s_entry
+{
+    unsigned int    key;
+    char            *value;
+}   t_entry;
+
 char	*ft_get_value(unsigned int key, char *path);
+t_entry *ft_parse_entry(char *line);
 int		ft_put_value(unsigned int key, char *path, t_buffer *buffer);
 int		ft_put_number(unsigned int nbr, char *path, t_buffer *buffer);
 
