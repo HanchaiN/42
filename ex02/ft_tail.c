@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tail.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 11:07:46 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:55:21 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,26 @@
 
 int	_main(int argc, char **argv, int byte_count, char *program_name)
 {
+	int	status;
 	int	ret;
 	int	i;
 
 	if (argc == 0)
-		return (ft_tail_stdin(byte_count, program_name));
-	if (argc == 1)
-		return (ft_tail_file(argv[0], byte_count, 0, program_name));
+	{
+		status = ft_tail_stdin(byte_count);
+		ft_display_error_errno(program_name, "-", status);
+		return (1);
+	}
 	ret = 0;
 	i = 0;
 	while (i < argc)
 	{
-		if (ft_tail_file(argv[i++], byte_count, 1, program_name))
-		{
-			if (i != argc)
-				ft_putstr("\n", STDERR_FILENO);
-			ret = 1;
-		}
+		status = ft_tail_file(argv[i], byte_count, argc != 1);
+		ret |= (status > 0);
+		ft_display_error_errno(program_name, argv[i], status);
+		if (i + 1 != argc)
+			ft_putstr("\n", STDOUT_FILENO);
+		i++;
 	}
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tail.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 10:17:29 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 10:55:13 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:46:36 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ft_display_error_errno(char *program_name, char *pathname, int status);
 void	ft_display_error_offset(char *program_name, char *offset);
 void	ft_display_header(char *pathname);
 int		ft_tail(int fileno, int byte_count);
-int		ft_tail_file(char *pathname, int byte_count,
-			int show_header, char *program_name);
-int		ft_tail_stdin(int byte_count, char *program_name);
+int		ft_tail_file(char *pathname, int byte_count, int show_header);
+int		ft_tail_stdin(int byte_count);
 
 #endif
