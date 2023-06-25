@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_buffer_strdup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 12:52:30 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:10:51 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/25 14:12:12 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
+#include "ft.h"
+#include "ft_buffer.h"
 
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-char	*ft_strdup(char *src);
-
-#endif
+char	*ft_buffer_strdup(t_buffer *buffer)
+{
+	return (ft_strdup(buffer->begin));
+}

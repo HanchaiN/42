@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_value.c                                     :+:      :+:    :+:   */
+/*   ft_read_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 13:49:15 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:17:45 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/25 14:14:07 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/25 14:14:47 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_buffer.h"
 #include "ft_dict.h"
-#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*ft_get_value(unsigned int key, char *path)
+char	*ft_read_line(int fileno)
 {
-	int		fileno;
-	t_entry	*entry;
-	char	*str;
+	t_buffer	*buffer;
+	int			read_count;
+	char		ch;
+	char		*str;
 
-	fileno = open(path, O_RDONLY);
-	if (fileno < 0)
+	read_count = read(fileno, &ch, 1);
+	if (read_count <= 0)
 		return (NULL);
-	entry = NULL;
-	str = ft_read_line(fileno);
-	while (str && (!entry || entry->key != key))
+	buffer = ft_buffer_new(1);
+	while (read_count > 0 && ch != '\n')
 	{
-		entry = ft_parse_entry(str);
-		str = ft_read_line(fileno);
+		ft_buffer_putchar(ch, buffer);
+		read_count = read(fileno, &ch, 1);
 	}
-	if (entry && entry->key == key)
-		str = entry->value;
-	else
-		str = NULL;
-	free(entry);
-	close(fileno);
+	str = ft_buffer_strdup(buffer);
+	free(buffer);
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:50:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 11:39:37 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:05:58 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		ft_buffer_free(t_buffer *buffer);
 void		ft_buffer_extend(t_buffer *buffer);
 void		ft_buffer_putchar(char ch, t_buffer *buffer);
 void		ft_buffer_putstr(char *str, t_buffer *buffer);
+char		*ft_buffer_strdup(t_buffer *buffer);
 void		ft_buffer_print(t_buffer *buffer);
 
 #endif
