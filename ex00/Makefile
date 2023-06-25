@@ -6,6 +6,7 @@ SOURCES = srcs/ft_dict.c \
 		  srcs/core/ft_get_value.c \
 		  srcs/core/ft_put_value.c \
 		  srcs/core/ft_parse_entry.c \
+		  srcs/core/ft_parse_number.c \
 		  srcs/fileio/ft_read_line.c \
 		  $(LOCALE_SOURCES)
 INCLUDE_DIR = includes/

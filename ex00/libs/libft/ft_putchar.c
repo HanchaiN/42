@@ -13,7 +13,7 @@
 #include "ft.h"
 #include <unistd.h>
 
-void	ft_putchar(char c)
+void	ft_putchar(char ch)
 {
-	write(STDOUT_FILENO, &c, 1);
+	write(STDOUT_FILENO, &ch, 1);
 }

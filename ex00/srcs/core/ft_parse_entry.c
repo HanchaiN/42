@@ -20,7 +20,7 @@ t_entry	*ft_parse_entry(char *line)
     t_entry *entry;
 
     entry = (t_entry *) malloc(sizeof(t_entry));
-    entry->key = atoi(line);
+    entry->key = ft_atoi_uint(line);
     line = strchr(line, ':');
     if (*line != ':')
     {

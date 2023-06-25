@@ -20,10 +20,11 @@ typedef struct s_entry
 	char			*value;
 }	t_entry;
 
-char	*ft_get_value(unsigned int key, const char *path);
-t_entry	*ft_parse_entry(char *line);
-int		ft_put_value(unsigned int key, const char *path, t_buffer *buffer);
-int		ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer);
+char			*ft_get_value(unsigned int key, const char *path);
+t_entry			*ft_parse_entry(char *line);
+int				ft_put_value(unsigned int key, const char *path, t_buffer *buffer);
+unsigned int	ft_parse_number(char string[], int *error_flag);
+int				ft_put_number(unsigned int nbr, const char *path, t_buffer *buffer);
 
 char	*ft_read_line(int fileno);
 

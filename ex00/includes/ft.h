@@ -13,10 +13,12 @@
 #ifndef FT_H
 # define FT_H
 
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-char	*ft_strdup(char *src);
-char	*ft_strtrim(char *src);
+int             ft_isspace(char ch);
+void	        ft_putchar(char ch);
+void	        ft_putstr(char *str);
+int	        	ft_strlen(char *str);
+char	        *ft_strdup(char *src);
+char	        *ft_strtrim(char *src);
+unsigned int    ft_atoi_uint(char *str);
 
 #endif

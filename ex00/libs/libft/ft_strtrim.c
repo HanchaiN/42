@@ -9,13 +9,13 @@ char	*ft_strtrim(char *src)
 
 	dst = (char *)malloc(ft_strlen(src) * sizeof(char));
 	dst_ptr = dst;
-    while (isspace(*src))
+    while (ft_isspace(*src))
         src++;
 	while (*src)
 	{
-        if(!isspace(*src) || (*(src + 1) && !isspace(*(src + 1))))
+        if(!ft_isspace(*src) || (*(src + 1) && !ft_isspace(*(src + 1))))
         {
-            if (isspace(*src))
+            if (ft_isspace(*src))
                 *dst_ptr = ' ';
             else
                 *dst_ptr = *src;
