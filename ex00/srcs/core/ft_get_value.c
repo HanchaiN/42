@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 13:49:15 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:17:45 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:43:32 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*ft_get_value(unsigned int key, char *path)
+char	*ft_get_value(unsigned int key, const char *path)
 {
 	int		fileno;
 	t_entry	*entry;

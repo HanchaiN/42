@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:17:11 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:43:38 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_dict.h"
 #include <stdlib.h>
 
-int	ft_put_value(unsigned int key, char *path, t_buffer *buffer)
+int	ft_put_value(unsigned int key, const char *path, t_buffer *buffer)
 {
 	char	*str;
 
