@@ -10,11 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft.h"
 #include "ft_dict.h"
 #include <stdlib.h>
+#include <string.h>
 
 t_entry	*ft_parse_entry(char *line)
 {
-	(void) line;
-	return (NULL);
+    t_entry *entry;
+
+    entry = (t_entry *) malloc(sizeof(t_entry));
+    entry->key = atoi(line);
+    line = strchr(line, ':');
+    if (*line != ':')
+    {
+        free(entry);
+        return (NULL);
+    }
+    line++;
+    entry->value = ft_strtrim(line);
+    line++;
+    return (entry);
 }

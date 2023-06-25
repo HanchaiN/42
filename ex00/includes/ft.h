@@ -17,5 +17,6 @@ void	ft_putchar(char c);
 void	ft_putstr(char *str);
 int		ft_strlen(char *str);
 char	*ft_strdup(char *src);
+char	*ft_strtrim(char *src);
 
 #endif

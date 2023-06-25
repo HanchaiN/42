@@ -6,7 +6,8 @@ ARFLAGS = -rs
 SOURCES = ft_putchar.c \
 		  ft_putstr.c \
 		  ft_strlen.c \
-		  ft_strdup.c
+		  ft_strdup.c \
+		  ft_strtrim.c
 INCLUDE_DIR = ../../includes/
 OBJECTS = $(SOURCES:.c=.o)
 
