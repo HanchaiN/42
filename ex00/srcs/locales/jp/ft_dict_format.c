@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 09:34:29 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:12:22 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 #include "ft_dict.h"
 #define MYRIAD (10000)
 
-const char			*g_default_dict = "./numbers.jp.dict";
+const char	*g_default_dict = "./numbers.jp.dict";
 
 static int	_put_number_digit(unsigned int digit, unsigned int digit_value,
 		const char *path, t_buffer *buffer)
 {
-	if (!ft_put_value(digit * digit_value, path, buffer))
+	if (((digit_value == 100 && (digit == 3 || digit == 6 || digit == 8))
+			|| (digit_value == 1000 && (digit == 3 || digit == 8)))
+		&& !ft_put_value(digit * digit_value, path, buffer))
 		return (0);
 	if (ft_put_value(digit, path, buffer))
 		return (1);
