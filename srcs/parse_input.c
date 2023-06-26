@@ -37,28 +37,30 @@ char	*get_markers(char *content)
 
 //Take the content
 //and create an empty matrix for problem solving
-int	**create_empty_matrix(char *content)
+
+// The function creates a convinient matrix for solving
+// we replace obstacle char with 0 and empty with 1 (ints)
+// This will allow us treat the problem as finding biggest sqr
+int	**prepare_matrix(char *content,
+		int n_lines, int len_of_line, char markers[3])
 {
-	int		n_lines;
-	int		len_of_line;
 	int		**matrix;
 	int		i;
 	int		j;
 
-	n_lines = str_to_num(content);
-	len_of_line = len_line(content);
 	matrix = (int **) malloc(n_lines * sizeof(int *));
 	i = 0;
-	j = 0;
 	while (i < n_lines)
 	{
 		matrix[i] = (int *) malloc(len_of_line * sizeof(int));
+		j = 0;
 		while (j < len_of_line)
 		{
-			matrix[i][j] = 0;
+			matrix[i][j] = (*content == markers[0]);
 			j++;
+			content++;
 		}
-		j = 0;
+		content++;
 		i++;
 	}
 	return (matrix);
