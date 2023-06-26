@@ -67,6 +67,7 @@ char	*get_content(char *path)
 	return (content);
 }
 
+
 //UNCOMMENT TO TEST READING FILE TO ARRAY OF CHARS
 /*
 int	main()
