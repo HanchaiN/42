@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 16:43:38 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/26 09:28:09 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_put_value(unsigned int key, const char *path, t_buffer *buffer)
 
 	str = ft_get_value(key, path);
 	if (!str)
-		return (0);
+		return (1);
 	ft_buffer_putstr(str, buffer);
 	free(str);
-	return (1);
+	return (0);
 }
