@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsq_funcs.h                                        :+:      :+:    :+:   */
+/*   ft_fileio.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sliashko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:14:47 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/26 11:14:52 by sliashko         ###   ########.fr       */
+/*   Created: 2023/06/26 14:53:15 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/26 15:07:58 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BSQ_FUNCS_H
-# define BSQ_FUNCS_H
+#ifndef FT_FILEIO_H
+# define FT_FILEIO_H
 
-//ONLY FOR DEBUG
-# include <stdio.h>
-
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-
-
-char	*get_content(char *path);
-void	ft_putstr(char *str);
+size_t	ft_get_file_size(char *path);
+char	*ft_read_file(char *path);
 
 #endif

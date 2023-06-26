@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "useful_funcs.h"
+#include "bsq.h"
 
-//Read first line and extract markers
+// Read first line and extract markers
 // for empty, obstacle and full cell respectively
 // MUST BE FREED AFTER USAGE
 char	*get_markers(char *content)

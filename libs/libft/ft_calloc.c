@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_uint.c                                     :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 19:37:43 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 19:37:53 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/26 14:46:33 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/26 14:52:18 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft.h"
 #include <stdlib.h>
 
-unsigned int	ft_atoi_uint(char *str)
+void	*ft_calloc(size_t count, size_t size)
 {
-	return (atoi(str));
+	void	*ptr;
+	char	*curr;
+	size_t	i;
+
+	ptr = malloc(count * size);
+	curr = ptr;
+	i = 0;
+	while (i < count * size)
+	{
+		curr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }
