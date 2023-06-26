@@ -8,6 +8,7 @@ SOURCES = ft_buffer_new.c \
 		  ft_buffer_extend.c \
 		  ft_buffer_putchar.c \
 		  ft_buffer_putstr.c \
+		  ft_buffer_putstrn.c \
 		  ft_buffer_strdup.c \
 		  ft_buffer_print.c
 INCLUDE_DIR = ../../includes/
