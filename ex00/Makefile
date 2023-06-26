@@ -1,4 +1,4 @@
-include en.mk
+include jp.mk
 NAME = rush-02
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

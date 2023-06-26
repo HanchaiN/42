@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 
 	error_flag = 0;
 	str = NULL;
-	dict_path = (char *)g_default_dict;
+	dict_path = (char *) g_default_dict;
 	if (argc == 1)
 	{
 		str = (char *) malloc(1024 * sizeof(char));
