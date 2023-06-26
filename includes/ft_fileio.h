@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_uint.c                                     :+:      :+:    :+:   */
+/*   ft_fileio.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 19:37:43 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 19:37:53 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/26 14:53:15 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/26 15:07:58 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft.h"
-#include <stdlib.h>
+#ifndef FT_FILEIO_H
+# define FT_FILEIO_H
 
-unsigned int	ft_atoi_uint(char *str)
-{
-	return (atoi(str));
-}
+size_t	ft_get_file_size(char *path);
+char	*ft_read_file(char *path);
+
+#endif

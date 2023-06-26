@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sliashko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:36:47 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/26 11:36:48 by sliashko         ###   ########.fr       */
+/*   Created: 2023/06/26 14:46:33 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/26 14:52:18 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq_funcs.h"
+#include "ft.h"
+#include <stdlib.h>
 
-//Prints the given string to std output
-void	ft_putstr(char *str)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int		i;
-	char	c;
+	void	*ptr;
+	char	*curr;
+	size_t	i;
 
+	ptr = malloc(count * size);
+	curr = ptr;
 	i = 0;
-	while (str[i] != '\0' )
+	while (i < count * size)
 	{
-		c = str[i];
-		write(1, &c, 1);
+		curr[i] = 0;
 		i++;
 	}
+	return (ptr);
 }
