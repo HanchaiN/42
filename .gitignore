@@ -80,5 +80,5 @@ Mkfile.old
 dkms.conf
 
 # Executable
-bdq
+bsq
 generator.pl
