@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_list_push_front.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:42:10 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/20 12:43:53 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:30:26 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_list.h"
 
