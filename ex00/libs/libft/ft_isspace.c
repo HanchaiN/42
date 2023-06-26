@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:37:46 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 15:23:52 by kkomasat         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:09:12 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,5 @@
 
 int	ft_isspace(char ch)
 {
-	if ((9 <= ch && ch <= 13) || ch == 32)
-	{
-		return (1);
-	}
-	else
-		return (0);
+	return ((9 <= ch && ch <= 13) || ch == 32);
 }

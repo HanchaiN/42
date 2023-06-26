@@ -6,53 +6,38 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 19:37:11 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 15:14:04 by kkomasat         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:30:16 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft.h"
 #include "ft_dict.h"
-#include <stdlib.h>
 
-unsigned int	handle_number(char string[], int *error_flag,
-				unsigned int *input_number, int *i)
+unsigned int	ft_parse_number(char *str, int *error_flag)
 {
-	while (string[*i] != '\0')
-	{
-		if ('0' <= string[*i] && string[*i] <= '9')
-		{
-			if (*input_number >= 429496730 || \
-						(*input_number >= 429496729 && string[*i] > '5'))
-			{
-				*error_flag = 1;
-				return (0);
-			}
-			else
-			{
-				*input_number = 10 * *input_number + (string[*i] - 48);
-				++*i;
-			}
-		}
-		else
-		{
-			*error_flag = 1;
-			return (0);
-		}
-	}
-	return (*input_number);
-}
+	unsigned int	nbr;
 
-unsigned int	ft_parse_number(char string[], int *error_flag)
-{
-	unsigned int	input_number;
-	int				i;
-
-	input_number = 0;
-	i = 0;
-	if (string == NULL)
+	if (!str)
 	{
-		*error_flag = 1;
+		*error_flag |= 1;
 		return (0);
 	}
-	input_number = handle_number(string, error_flag, &input_number, &i);
-	return (input_number);
+	while (ft_isspace(*str))
+		str++;
+	nbr = 0;
+	if (*str == '+')
+		str++;
+	while ('0' <= *str && *str <= '9')
+	{
+		if (nbr >= 429496730 || (nbr >= 429496729 && *str > '5'))
+		{
+			*error_flag |= 1;
+			return (0);
+		}
+		nbr *= 10;
+		nbr += *str - '0';
+		str++;
+	}
+	*error_flag |= (*str != '\0');
+	return (nbr);
 }

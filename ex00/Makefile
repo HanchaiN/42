@@ -11,8 +11,8 @@ SOURCES = srcs/ft_dict.c \
 		  srcs/fileio/ft_read_line.c \
 		  $(LOCALE_SOURCES)
 INCLUDE_DIR = includes/
-LIBS = libs/libft/libft.a \
-	   libs/libft_buffer/libft_buffer.a
+LIBS = libs/libft_buffer/libft_buffer.a \
+	   libs/libft/libft.a
 DEFAULT_DICT = ./numbers.en.dict
 
 .PHONY: all re fclean clean libs

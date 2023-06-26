@@ -6,38 +6,42 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:18:34 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 21:08:39 by kkomasat         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:30:07 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_buffer.h"
 #include "ft_dict.h"
+#include <stdio.h>
 #define THOUSAND (1000)
 
-const char *g_default_dict = "./numbers.en.dict";
+const char	*g_default_dict = "./numbers.en.dict";
 
-static int    _put_number_group(unsigned int nbr, const char *path, t_buffer *buffer)
+static int	_put_number_group(unsigned int nbr, const char *path,
+				t_buffer *buffer)
 {
-    if (nbr == 0)
-        return (0);
-    if (nbr / 100)
-    {
-        if (ft_put_number(nbr / 100, path, buffer))
-            return (1);
-        ft_buffer_putstr(" ", buffer);
-        if (ft_put_number(100, path, buffer))
-            return (1);
-        if (nbr % 100)
-            ft_buffer_putstr(" and ", buffer);
-    }
-    if ((nbr % 100) / 10 == 1)
-        return (ft_put_value(nbr % 100, path, buffer));
-    if (ft_put_value((nbr % 100 / 10) * 10, path, buffer))
-        return (1);
-    if ((nbr % 100) / 10 && nbr % 10)
-        ft_buffer_putstr("-", buffer);
-    if (ft_put_value(nbr % 10, path, buffer))
-        return (1);
-    return (0);
+	if (nbr == 0)
+		return (0);
+	if (nbr / 100)
+	{
+		if (ft_put_value(nbr / 100, path, buffer))
+			return (1);
+		ft_buffer_putstr(" ", buffer);
+		if (ft_put_value(100, path, buffer))
+			return (1);
+		if (nbr % 100)
+			ft_buffer_putstr(" and ", buffer);
+	}
+	if ((nbr % 100) / 10 == 1)
+		return (ft_put_value(nbr % 100, path, buffer));
+	if ((nbr % 100) / 10
+		&& ft_put_value((nbr % 100 / 10) * 10, path, buffer))
+		return (1);
+	if ((nbr % 100) / 10 && nbr % 10)
+		ft_buffer_putstr("-", buffer);
+	if (nbr % 10 && ft_put_value(nbr % 10, path, buffer))
+		return (1);
+	return (0);
 }
 
 static unsigned int	_get_group_digit_value(unsigned int nbr)
