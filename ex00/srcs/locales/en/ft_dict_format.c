@@ -15,27 +15,29 @@
 
 const char *g_default_dict = "./numbers.en.dict";
 
-static int	_put_number_group(unsigned int nbr, const char *path, t_buffer *buffer)
+static int    _put_number_group(unsigned int nbr, const char *path, t_buffer *buffer)
 {
-	if (nbr / 100)
-	{
-		if (ft_put_number(nbr / 100, path, buffer))
-			return (1);
-		ft_buffer_putstr(" ", buffer);
-		if (ft_put_number(100, path, buffer))
-			return (1);
-		if (nbr % 100)
-			ft_buffer_putstr(" and ", buffer);
-	}
-	if ((nbr % 100) / 10 == 1)
-		return (ft_put_value(nbr % 100, path, buffer));
-	if (ft_put_value(nbr % 100 / 10, path, buffer))
-		return (1);
-	if ((nbr % 100) / 10 && nbr % 10)
-		ft_buffer_putstr("-", buffer);
-	if (ft_put_value(nbr % 10, path, buffer))
-		return (1);
-	return (0);
+    if (nbr == 0)
+        return (0);
+    if (nbr / 100)
+    {
+        if (ft_put_number(nbr / 100, path, buffer))
+            return (1);
+        ft_buffer_putstr(" ", buffer);
+        if (ft_put_number(100, path, buffer))
+            return (1);
+        if (nbr % 100)
+            ft_buffer_putstr(" and ", buffer);
+    }
+    if ((nbr % 100) / 10 == 1)
+        return (ft_put_value(nbr % 100, path, buffer));
+    if (ft_put_value((nbr % 100 / 10) * 10, path, buffer))
+        return (1);
+    if ((nbr % 100) / 10 && nbr % 10)
+        ft_buffer_putstr("-", buffer);
+    if (ft_put_value(nbr % 10, path, buffer))
+        return (1);
+    return (0);
 }
 
 static unsigned int	_get_group_digit_value(unsigned int nbr)
