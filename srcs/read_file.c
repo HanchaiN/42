@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq_funcs.h"
+#include "useful_funcs.h"
 
 //This function gets file descriptor
 int	get_fd(char *path)
@@ -66,15 +66,3 @@ char	*get_content(char *path)
 	close(fd);
 	return (content);
 }
-
-
-//UNCOMMENT TO TEST READING FILE TO ARRAY OF CHARS
-/*
-int	main()
-{
-	char	*content;
-
-	content = get_content("test.txt");
-	printf("%s", content);
-}
-*/
