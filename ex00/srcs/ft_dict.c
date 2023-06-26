@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:54:32 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 17:55:16 by kkomasat         ###   ########.fr       */
+/*   Updated: 2023/06/26 09:34:25 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,22 @@ int	main(int argc, char **argv)
 		error_flag = 1;
 	nbr = ft_parse_number(str, &error_flag);
 	free(str);
-	if (error_flag > 0)
+	if (error_flag)
 	{
 		write(STDERR_FILENO, "Error\n", 6);
 		return (1);
 	}
 	buffer = ft_buffer_new(0);
-	if (ft_put_number(nbr, dict_path, buffer) == 0)
+	if (ft_put_number(nbr, dict_path, buffer))
+	{
+		error_flag = 1;
 		write(STDERR_FILENO, "Dict Error\n", 11);
+	}
 	else
+	{
+		ft_buffer_putchar('\n', buffer);
 		ft_buffer_print(buffer);
+	}
 	ft_buffer_free(buffer);
-	return (0); 
+	return (error_flag);
 }

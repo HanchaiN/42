@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_value.c                                     :+:      :+:    :+:   */
+/*   ft_buffer_putstrn.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 09:28:09 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/26 09:23:50 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_buffer.h"
-#include "ft_dict.h"
-#include <stdlib.h>
 
-int	ft_put_value(unsigned int key, const char *path, t_buffer *buffer)
+void	ft_buffer_putstrn(char *str, int n, t_buffer *buffer)
 {
-	char	*str;
+	int	i;
 
-	str = ft_get_value(key, path);
-	if (!str)
-		return (1);
-	ft_buffer_putstr(str, buffer);
-	free(str);
-	return (0);
+	i = 0;
+	while (str[i] && i < n)
+	{
+		ft_buffer_putchar(str[i], buffer);
+		i++;
+	}
 }
