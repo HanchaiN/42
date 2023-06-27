@@ -1,19 +1,14 @@
-NAME = libft.a
+NAME = libft_fileio.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = -rs
-SOURCES = ft_atoi.c \
-		  ft_calloc.c \
-		  ft_isdigit.c \
-		  ft_isspace.c \
-		  ft_min.c \
-		  ft_putchar.c \
-		  ft_putstr.c \
-		  ft_strdup.c \
-		  ft_strlen.c \
-		  ft_strtrim.c
+SOURCES = ft_get_file_size.c \
+		  ft_read_file.c \
+		  ft_read_line.c
 INCLUDE_DIR = ../../includes/
+LIBS = ../libft_buffer/libft_buffer.a \
+	   ../libft/libft.a
 OBJECTS = $(SOURCES:.c=.o)
 
 .PHONY: all re fclean clean

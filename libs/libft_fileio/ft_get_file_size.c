@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_read_file.c                                     :+:      :+:    :+:   */
+/*   ft_get_file_size.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:10:25 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/26 15:07:08 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:11:54 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fileio.h"
 #include <fcntl.h>
 #include <stdlib.h>
-#include <sys/types.h>
+#include <unistd.h>
 
-/** Read content of a file
+/** Get file size
  * @param path path to the file
- * @return content of the whole file (must be freed).
+ * @return size of the file (in bytes)
 */
-char	*ft_read_file(char *path)
+size_t	ft_get_file_size(char *path)
 {
-	char	*buffer;
 	int		fileno;
-	size_t	size;
+	char	buffer[1024];
+	ssize_t	read_size;
+	size_t	file_size;
 
-	size = ft_get_file_size(fileno);
 	fileno = open(path, O_RDONLY);
-	buffer = (char *) malloc(size * sizeof(char));
-	if (fileno < 0 || read(fileno, buffer, size) != size)
+	if (fileno < 0)
+		return (0);
+	read_size = 1;
+	file_size = 0;
+	while (read_size > 0)
 	{
-		free(buffer);
-		ft_putstr("Failed to read content\n");
-		return (NULL);
+		read_size = read(fileno, buffer, sizeof(buffer));
+		if (read_size < 0)
+		{
+			close(fileno);
+			return (-1);
+		}
+		file_size += read_size;
 	}
 	close(fileno);
-	return (buffer);
+	return (file_size);
 }

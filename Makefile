@@ -2,12 +2,11 @@ NAME = bsq
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SOURCES = srcs/bsq.c \
-		  srcs/core/bsq_find_largest_square.c \
-		  srcs/fileio/ft_get_file_size.c \
-		  srcs/fileio/ft_read_file.c
+		  srcs/core/bsq_find_largest_square.c
 INCLUDE_DIR = includes/
-LIBS = libs/libft/libft.a \
-	   libs/libft_buffer/libft_buffer.a
+LIBS = libs/libft_fileio/libft_fileio.a \
+	   libs/libft_buffer/libft_buffer.a \
+	   libs/libft/libft.a
 
 .PHONY: all re fclean clean libs
 

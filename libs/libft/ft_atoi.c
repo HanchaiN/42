@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 12:52:30 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 10:04:13 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/27 09:51:51 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/27 10:04:57 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_H
-# define FT_H
-# include <sys/types.h>
+#include "ft.h"
 
-int				ft_isdigit(char ch);
-int				ft_isspace(char ch);
-int				ft_atoi(char *str);
-void			ft_putchar(char ch);
-void			ft_putstr(char *str);
-int				ft_strlen(char *str);
-char			*ft_strdup(char *src);
-char			*ft_strtrim(char *src);
-void			*ft_calloc(size_t count, size_t size);
-unsigned int	ft_min(unsigned int *tab, unsigned int count);
+int	ft_atoi(char *str)
+{
+	int	nbr;
+	int	sign;
 
-#endif
+	sign = 1;
+	nbr = 0;
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			sign = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		nbr = nbr * 10 + (*str - '0');
+		str++;
+	}
+	return (sign * nbr);
+}

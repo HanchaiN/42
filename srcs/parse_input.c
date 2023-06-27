@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sliashko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:32:32 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/26 15:32:46 by sliashko         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:08:03 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
+#include "ft.h"
 
 // Read first line and extract markers
 // for empty, obstacle and full cell respectively
@@ -21,10 +22,8 @@ char	*get_markers(char *content)
 	int		i;
 
 	markers = (char *) malloc(sizeof(char) * 3);
-	while (is_num(*content))
-	{
+	while (ft_isdigit(*content))
 		content++;
-	}
 	i = 0;
 	while (*content != '\n' && i <= 2)
 	{

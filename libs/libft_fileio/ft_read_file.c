@@ -1,45 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_file_size.c                                 :+:      :+:    :+:   */
+/*   ft_read_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:10:25 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/26 15:07:00 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 10:14:19 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft.h"
 #include "ft_fileio.h"
 #include <fcntl.h>
-#include <sys/types.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-/** Get file size
+/** Read content of a file
  * @param path path to the file
- * @return size of the file (in bytes)
+ * @return null-terminated string malloc(3)ed by the call
 */
-size_t	ft_get_file_size(char *path)
+char	*ft_read_file(char *path)
 {
+	char	*buffer;
 	int		fileno;
-	char	buffer[1024];
+	size_t	size;
 	ssize_t	read_size;
-	size_t	file_size;
 
+	size = ft_get_file_size(path);
 	fileno = open(path, O_RDONLY);
-	if (fileno < 0)
-		return (0);
-	read_size = 1;
-	file_size = 0;
-	while (read_size > 0)
+	buffer = (char *) malloc(size * sizeof(char));
+	read_size = read(fileno, buffer, size);
+	if (fileno < 0 || read_size < 0 || (size_t) read_size != size)
 	{
-		read_size = read(fileno, buffer, sizeof(buffer));
-		if (read_size < 0)
-		{
-			close(fileno);
-			return (-1);
-		}
-		file_size += read_size;
+		free(buffer);
+		ft_putstr("Failed to read content\n");
+		return (NULL);
 	}
 	close(fileno);
-	return (file_size);
+	return (buffer);
 }
