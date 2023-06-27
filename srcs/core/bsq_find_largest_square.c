@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:54:46 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 09:49:35 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 12:10:36 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,11 @@ static void	_update_solution(unsigned int x1, unsigned int y1,
 /** Find the biggest square avoiding obstacles.
  * @param x width of the `grid`
  * @param y height of the `grid`
- * @param grid two-dimensional array of size `[y][x]`;
- * faulty value represent obstacles
+ * @param grid `int[y][x]`; faulty value represent obstacles
  * @return coordinate of top-left and bottom-right corner of the square;
  * NULL if no such square exists.
 */
-t_square	*bsq_find_largest_square(size_t x, size_t y, const int **grid)
+t_square	*bsq_find_largest_square(const t_grid *grid)
 {
 	t_square	*solution;
 	int			*max_size;
@@ -46,21 +45,21 @@ t_square	*bsq_find_largest_square(size_t x, size_t y, const int **grid)
 	size_t		j;
 
 	solution = NULL;
-	max_size = (int *) ft_calloc(2 * (x + 1), sizeof(int));
+	max_size = (int *) ft_calloc(2 * (grid->x + 1), sizeof(int));
 	i = 0;
-	while (++i <= y)
+	while (++i <= grid->y)
 	{
 		j = 0;
-		while (++j <= x)
+		while (++j <= grid->x)
 		{
-			if (!grid[i][j])
-				max_size[(i % 2) * x + j] = 0;
+			if (grid->value[i][j] != EMPTY)
+				max_size[(i % 2) * grid->x + j] = 0;
 			else
-				max_size[(i % 2) * x + j] = 1 + ft_min((unsigned int [3]){
-						max_size[(1 - i % 2) * x + j - 1],
-						max_size[(i % 2) * x + j - 1],
-						max_size[(1 - i % 2) * x + j]}, 3);
-			_update_solution(i, j, max_size[(i % 2) * x + j], &solution);
+				max_size[(i % 2) * grid->x + j] = 1 + ft_min((unsigned int [3]){
+						max_size[(1 - i % 2) * grid->x + j - 1],
+						max_size[(i % 2) * grid->x + j - 1],
+						max_size[(1 - i % 2) * grid->x + j]}, 3);
+			_update_solution(i, j, max_size[(i % 2) * grid->x + j], &solution);
 		}
 	}
 	free(max_size);
