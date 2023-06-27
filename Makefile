@@ -5,7 +5,8 @@ SOURCES = srcs/bsq.c \
 		  srcs/bsq_display_grid.c \
 		  srcs/bsq_find_largest_square.c \
 		  srcs/bsq_parse_header.c \
-		  srcs/utils/ft_min.c
+		  srcs/utils/ft_min.c \
+		  srcs/validate_input.c
 INCLUDE_DIR = includes/
 LIBS = libs/libft_fileio/libft_fileio.a \
 	   libs/libft_buffer/libft_buffer.a \

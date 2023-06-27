@@ -15,6 +15,27 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+//Test part for test validation of matrix
+/*
+#include <stdio.h>
+int	main()
+{
+	char		*content;
+	t_marker	markers;
+
+	content = ft_read_file("test.txt");
+	markers = bsq_parse_header_markers(content);
+	while (*content != '\n')
+		content++;
+	content++;
+	printf("content char now = %c|", *content);
+	printf("Check chars: %d\n", check_matrix_chars(content, markers));
+	printf("Check shape: %d \n", check_shape(content, 5, 5));
+}
+*/
+
+
+
 static int	_main(int fileno)
 {
 	char		*str;

@@ -45,6 +45,7 @@ int	check_shape(char *matr, int m, int n)
 			count_lines++;
 			if (count_chars != n)
 				return (0);
+			count_chars = 0;
 			matr++;
 		}
 		else
