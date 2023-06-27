@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+
 int	_main(int fileno)
 {
 	char		*str;
@@ -32,6 +33,7 @@ int	_main(int fileno)
 	square = bsq_find_largest_square(&grid);
 	bsq_display_grid(&grid, square, marker);
 }
+
 
 int	main(int argc, char **argv)
 {
