@@ -43,4 +43,7 @@ void		bsq_display_grid(const t_grid *grid, const t_square *square,
 				const t_marker marker);
 int			len_line(char *str);
 
+int			check_matrix_chars(char *matr, t_marker markers);
+int			check_shape(char *matr, int m, int n);
+
 #endif
