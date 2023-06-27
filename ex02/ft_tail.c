@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:55:21 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 09:04:46 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	_main(int argc, char **argv, int byte_count, char *program_name)
 		status = ft_tail_file(argv[i], byte_count, argc != 1);
 		ret |= (status > 0);
 		ft_display_error_errno(program_name, argv[i], status);
-		if (i + 1 != argc)
-			ft_putstr("\n", STDOUT_FILENO);
 		i++;
 	}
 	return (ret);
