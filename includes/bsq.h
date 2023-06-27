@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:50:19 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 12:09:23 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:33:49 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct s_square
 	unsigned int	y1;
 }					t_square;
 
-t_square	*bsq_find_largest_square(const t_grid *grid);
-void		bsq_display_grid(const t_grid *grid, const t_square *square,
-				const t_marker marker);
-int			len_line(char *str);
+unsigned int	ft_min(unsigned int *tab, unsigned int count);
+int				len_line(char *str);
+
+t_marker		bsq_parse_header_markers(char *header);
+t_square		*bsq_find_largest_square(const t_grid *grid);
+void			bsq_display_grid(const t_grid *grid, const t_square *square,
+					const t_marker marker);
 
 #endif

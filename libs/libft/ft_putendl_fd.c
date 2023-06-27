@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_buffer_putstr.c                                 :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 15:02:32 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/10 16:00:05 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/27 14:38:17 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_buffer.h"
+#include "ft.h"
+#include <unistd.h>
 
-/** Append a string to the buffer
-*/
-void	ft_buffer_putstr(char *str, t_buffer *buffer)
+void	ft_putendl_fd(char *str, int fd)
 {
-	while (*str)
-	{
-		ft_buffer_putchar(*str, buffer);
-		str++;
-	}
+	ft_putstr_fd(str, fd);
+	ft_putchar_fd('\n', fd);
 }

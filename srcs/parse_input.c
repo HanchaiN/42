@@ -6,29 +6,11 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:32:32 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/27 10:08:03 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:26:41 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
-
-// Read first line and extract markers
-// for empty, obstacle and full cell respectively
-// MUST BE FREED AFTER USAGE
-t_marker	get_markers(char *content)
-{
-	t_marker	markers;
-	int			i;
-
-	while (ft_isdigit(*content))
-		content++;
-	markers.empty = *content;
-	content++;
-	markers.obstacle = *content;
-	content++;
-	markers.full = *content;
-	return (markers);
-}
 
 //Take the content
 //and create an empty matrix for problem solving
