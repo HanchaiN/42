@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_file.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 09:58:20 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:36:40 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <unistd.h>
+#define BUFFER_SIZE 32767
 
 int	ft_display_file(char *pathname)
 {
 	int		file_no;
 	int		read_count;
-	char	buffer[32767];
+	char	buffer[BUFFER_SIZE];
 
 	file_no = open(pathname, O_RDONLY);
 	if (file_no < 0)
 		return (-1);
-	read_count = read(file_no, buffer, 32767);
+	read_count = read(file_no, buffer, BUFFER_SIZE);
 	while (read_count > 0)
 	{
 		write(STDOUT_FILENO, buffer, read_count);
-		read_count = read(file_no, buffer, 32767);
+		read_count = read(file_no, buffer, BUFFER_SIZE);
 	}
 	close(file_no);
 	if (read_count < 0)
