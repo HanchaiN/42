@@ -16,21 +16,18 @@
 // Read first line and extract markers
 // for empty, obstacle and full cell respectively
 // MUST BE FREED AFTER USAGE
-char	*get_markers(char *content)
+t_marker	get_markers(char *content)
 {
-	char	*markers;
-	int		i;
+	t_marker	markers;
+	int			i;
 
-	markers = (char *) malloc(sizeof(char) * 3);
 	while (ft_isdigit(*content))
 		content++;
-	i = 0;
-	while (*content != '\n' && i <= 2)
-	{
-		markers[i] = *content;
-		i++;
-		content++;
-	}
+	markers.empty = *content;
+	content++;
+	markers.obstacle = *content;
+	content++;
+	markers.full = *content;
 	return (markers);
 }
 
@@ -41,7 +38,7 @@ char	*get_markers(char *content)
 // we replace obstacle char with 0 and empty with 1 (ints)
 // This will allow us treat the problem as finding biggest sqr
 int	**prepare_matrix(char *content,
-		int n_lines, int len_of_line, char markers[3])
+		int n_lines, int len_of_line, t_marker markers)
 {
 	int		**matrix;
 	int		i;
@@ -55,7 +52,7 @@ int	**prepare_matrix(char *content,
 		j = 0;
 		while (j < len_of_line)
 		{
-			matrix[i][j] = (*content == markers[0]);
+			matrix[i][j] = (*content == markers.empty);
 			j++;
 			content++;
 		}

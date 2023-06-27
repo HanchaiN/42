@@ -12,7 +12,7 @@
 
 #ifndef FT_H
 # define FT_H
-# include <sys/types.h>
+# include <stdlib.h>
 
 int				ft_isdigit(char ch);
 int				ft_isspace(char ch);

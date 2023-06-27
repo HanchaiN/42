@@ -12,8 +12,18 @@
 
 #ifndef BSQ_H
 # define BSQ_H
-# include <sys/types.h>
+# include "ft.h"
+# include "ft_buffer.h"
+# include "ft_fileio.h"
+# include <stdlib.h>
+# include <unistd.h>
 
+typedef struct s_marker
+{
+	char	empty;
+	char	obstacle;
+	char	full;
+}	t_marker;
 typedef struct s_square
 {
 	unsigned int	x0;
