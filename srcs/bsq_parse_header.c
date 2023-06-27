@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_buffer_putstr.c                                 :+:      :+:    :+:   */
+/*   bsq_parse_header.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 15:02:32 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/27 14:21:25 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/27 14:47:45 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_buffer.h"
+#include "bsq.h"
 
-/** Append a string to the buffer
+/** Extract the markers from the header line
+ * @param header header line (without the newline)
 */
-void	ft_buffer_putstr(char *str, t_buffer *buffer)
+t_marker	bsq_parse_header_markers(char *header)
 {
-	while (*str)
-	{
-		ft_buffer_putchar(*str, buffer);
-		str++;
-	}
+	t_marker	markers;
+
+	while (ft_isdigit(*header))
+		header++;
+	markers.empty = *header;
+	header++;
+	markers.obstacle = *header;
+	header++;
+	markers.full = *header;
+	return (markers);
 }

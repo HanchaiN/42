@@ -6,14 +6,13 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:54:46 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 12:10:36 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:28:31 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 #include "ft.h"
 #include <stdlib.h>
-#include <sys/types.h>
 
 static void	_update_solution(unsigned int x1, unsigned int y1,
 			unsigned int size, t_square **solution)
@@ -31,11 +30,8 @@ static void	_update_solution(unsigned int x1, unsigned int y1,
 }
 
 /** Find the biggest square avoiding obstacles.
- * @param x width of the `grid`
- * @param y height of the `grid`
- * @param grid `int[y][x]`; faulty value represent obstacles
- * @return coordinate of top-left and bottom-right corner of the square;
- * NULL if no such square exists.
+ * @return coordinate of the square malloc(3)ed by the call;
+ * `NULL` if no such square exists.
 */
 t_square	*bsq_find_largest_square(const t_grid *grid)
 {

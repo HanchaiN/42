@@ -6,13 +6,18 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:54:20 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 14:36:08 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:00:22 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_buffer.h"
 #include <stdlib.h>
 
+/** Initialize buffer with certain capacity
+ * @param capacity initial capacity of the buffer;
+ * Automatically defaults to `1` if `0` is passed in
+ * @return pointer to the buffer
+*/
 t_buffer	*ft_buffer_new(unsigned int capacity)
 {
 	t_buffer	*buffer;

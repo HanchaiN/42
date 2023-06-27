@@ -6,13 +6,18 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:53:39 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 12:09:08 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:25:21 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 #include "ft.h"
 
+/** Display the grid with or without the square
+ * @param grid the pointer to the grid data
+ * @param square the pointer to the coordinate of the square;
+ * `NULL` if don't want to draw one.
+*/
 void	bsq_display_grid(const t_grid *grid, const t_square *square,
 				const t_marker marker)
 {

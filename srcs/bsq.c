@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:49:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 14:19:26 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:12:31 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-
-int	_main(int fileno)
+static int	_main(int fileno)
 {
 	char		*str;
 	t_marker	marker;
@@ -27,11 +26,12 @@ int	_main(int fileno)
 		return (1);
 	str = ft_read_line(fileno);
 	grid.m = ft_atoi(str);
-	marker = get_markers(str);
+	marker = bsq_parse_header_markers(str);
 	free(str);
 	// TODO: Validate and parse the rest of the file.
 	square = bsq_find_largest_square(&grid);
 	bsq_display_grid(&grid, square, marker);
+	return (0);
 }
 
 
