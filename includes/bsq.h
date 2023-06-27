@@ -18,11 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef enum e_state {
-	EMPTY,
-	OBSTACLE,
-	FULL
-}					t_state;
 typedef struct s_marker
 {
 	char			empty;
@@ -31,9 +26,9 @@ typedef struct s_marker
 }					t_marker;
 typedef struct s_grid
 {
-	unsigned int	x;
-	unsigned int	y;
-	t_state			**value;
+	unsigned int	n;
+	unsigned int	m;
+	int				**value;
 }					t_grid;
 typedef struct s_square
 {

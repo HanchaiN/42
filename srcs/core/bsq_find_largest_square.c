@@ -45,21 +45,21 @@ t_square	*bsq_find_largest_square(const t_grid *grid)
 	size_t		j;
 
 	solution = NULL;
-	max_size = (int *) ft_calloc(2 * (grid->x + 1), sizeof(int));
+	max_size = (int *) ft_calloc(2 * (grid->n + 1), sizeof(int));
 	i = 0;
-	while (++i <= grid->y)
+	while (++i <= grid->m)
 	{
 		j = 0;
-		while (++j <= grid->x)
+		while (++j <= grid->n)
 		{
-			if (grid->value[i][j] != EMPTY)
-				max_size[(i % 2) * grid->x + j] = 0;
+			if (!grid->value[i][j])
+				max_size[(i % 2) * grid->n + j] = 0;
 			else
-				max_size[(i % 2) * grid->x + j] = 1 + ft_min((unsigned int [3]){
-						max_size[(1 - i % 2) * grid->x + j - 1],
-						max_size[(i % 2) * grid->x + j - 1],
-						max_size[(1 - i % 2) * grid->x + j]}, 3);
-			_update_solution(i, j, max_size[(i % 2) * grid->x + j], &solution);
+				max_size[(i % 2) * grid->n + j] = 1 + ft_min((unsigned int [3]){
+						max_size[(1 - i % 2) * grid->n + j - 1],
+						max_size[(i % 2) * grid->n + j - 1],
+						max_size[(1 - i % 2) * grid->n + j]}, 3);
+			_update_solution(i, j, max_size[(i % 2) * grid->n + j], &solution);
 		}
 	}
 	free(max_size);

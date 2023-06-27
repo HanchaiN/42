@@ -19,6 +19,7 @@ int				ft_isspace(char ch);
 int				ft_atoi(char *str);
 void			ft_putchar(char ch);
 void			ft_putstr(char *str);
+void			ft_putnbr(int nb);
 int				ft_strlen(char *str);
 char			*ft_strdup(char *src);
 char			*ft_strtrim(char *src);

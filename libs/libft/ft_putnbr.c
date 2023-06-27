@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsq.c                                              :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: sliashko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 11:49:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/26 12:35:57 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/27 11:53:40 by sliashko          #+#    #+#             */
+/*   Updated: 2023/06/27 11:54:16 by sliashko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#include "ft.h"
 
-/*
-int	main(int argc, char **argv)
+void	ft_putnbr(int nb)
 {
-	(void) argc;
-	(void) argv;
-	return (0);
+	long int	n;
+
+	n = nb;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = n * -1;
+	}
+	if (n < 10)
+	{
+		ft_putchar(n + '0');
+	}
+	else
+	{
+		ft_putnbr(n / 10);
+		ft_putchar(n % 10 + '0');
+	}
 }
-*/

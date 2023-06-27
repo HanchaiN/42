@@ -1,4 +1,0 @@
-Hello world!
-This is a test file
-to make sure
-I did reading correctly!

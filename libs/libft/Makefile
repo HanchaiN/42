@@ -12,7 +12,8 @@ SOURCES = ft_atoi.c \
 		  ft_putstr.c \
 		  ft_strdup.c \
 		  ft_strlen.c \
-		  ft_strtrim.c
+		  ft_strtrim.c \
+		  ft_putnbr.c
 INCLUDE_DIR = ../../includes/
 OBJECTS = $(SOURCES:.c=.o)
 

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "bsq.h"
-#include "ft.h"
 
 // Read first line and extract markers
 // for empty, obstacle and full cell respectively

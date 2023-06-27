@@ -20,16 +20,16 @@ void	bsq_display_grid(const t_grid *grid, const t_square *square,
 	unsigned int	j;
 
 	i = 0;
-	while (i < grid->y)
+	while (i < grid->m)
 	{
 		j = 0;
-		while (j < grid->x)
+		while (j < grid->n)
 		{
 			if (square
 				&& square->x0 <= j && j <= square->x1
 				&& square->y0 <= i && i <= square->y1)
 				ft_putchar(marker.full);
-			else if (grid->value[i][j] == EMPTY)
+			else if (grid->value[i][j])
 				ft_putchar(marker.empty);
 			else
 				ft_putchar(marker.obstacle);
