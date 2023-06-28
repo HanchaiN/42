@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/25 14:46:29 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:59:04 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_tail(int fileno, int byte_count)
 		i++;
 		read_count = read(fileno, buffer + i % byte_count, 1);
 	}
-	if (i > byte_count)
+	if (i >= byte_count)
 		write(STDOUT_FILENO,
 			buffer + i % byte_count,
 			byte_count - i % byte_count);

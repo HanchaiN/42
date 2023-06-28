@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tail_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <nonpras@student.42bangkok.com    +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:14:54 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/23 14:36:06 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:57:55 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
