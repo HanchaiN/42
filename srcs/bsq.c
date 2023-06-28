@@ -15,6 +15,8 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#include <stdio.h>
 //Test part for test validation of matrix
 /*
 int	main()
@@ -75,6 +77,7 @@ static int	_main(int fileno)
 		return (1);
 	str = ft_read_line(fileno);
 	m = bsq_parse_header(str, &marker);
+	printf("empty = %c, obst = %c, full = %c\n", marker.empty, marker.obstacle, marker.full);
 	free(str);
 	if (m <= 0 || !check_duplicates(marker))
 		return (1);
@@ -84,7 +87,6 @@ static int	_main(int fileno)
 		free(str);
 		return (1);
 	}
-	// TODO: Validate everything.
 	grid = bsq_parse_grid(str, m, n, marker);
 	free(str);
 	square = bsq_find_largest_square(grid);

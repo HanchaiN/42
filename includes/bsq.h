@@ -51,5 +51,6 @@ void			bsq_free_grid(t_grid *grid);
 
 int				check_matrix_chars(char *matr, t_marker markers);
 int				check_shape(char *matr, int m, int n);
+int				check_duplicates(t_marker marker);
 
 #endif
