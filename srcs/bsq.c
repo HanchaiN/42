@@ -6,32 +6,16 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:49:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 11:54:48 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 13:08:39 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
+#include "ft.h"
 #include "ft_fileio.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-//Test part for test validation of matrix
-/*
-int	main()
-{
-	char		*content;
-	t_marker	markers;
-
-	content = ft_read_file("test.txt");
-	markers = bsq_parse_header_markers(content);
-	while (*content != '\n')
-		content++;
-	content++;
-	printf("content char now = %c|", *content);
-	printf("Check chars: %d\n", check_matrix_chars(content, markers));
-	printf("Check shape: %d \n", check_shape(content, 5, 5));
-}
-*/
 
 static int	_read_lines(char **str, int fileno, unsigned int n)
 {
@@ -62,12 +46,22 @@ static int	_read_lines(char **str, int fileno, unsigned int n)
 	return (len - 1);
 }
 
-static int	_main(int fileno)
+static int	_main_solve(t_marker marker, t_grid *grid)
+{
+	t_square	*square;
+
+	square = bsq_find_largest_square(grid);
+	bsq_display_grid(grid, square, marker);
+	bsq_free_grid(grid);
+	free(square);
+	return (0);
+}
+
+static int	_main_parse(int fileno)
 {
 	char		*str;
 	t_marker	marker;
 	t_grid		*grid;
-	t_square	*square;
 	int			m;
 	int			n;
 
@@ -84,14 +78,9 @@ static int	_main(int fileno)
 		free(str);
 		return (1);
 	}
-	// TODO: Validate everything.
 	grid = bsq_parse_grid(str, m, n, marker);
 	free(str);
-	square = bsq_find_largest_square(grid);
-	bsq_display_grid(grid, square, marker);
-	bsq_free_grid(grid);
-	free(square);
-	return (0);
+	return (_main_solve(marker, grid));
 }
 
 int	main(int argc, char **argv)
@@ -101,7 +90,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		if (_main(STDIN_FILENO) == 0)
+		if (_main_parse(STDIN_FILENO) == 0)
 			return (0);
 		ft_putendl_fd("map error", STDERR_FILENO);
 		return (1);
@@ -111,7 +100,7 @@ int	main(int argc, char **argv)
 	while (*argv)
 	{
 		fileno = open(*argv, O_RDONLY);
-		if (_main(fileno) != 0)
+		if (_main_parse(fileno) != 0)
 		{
 			ret = 1;
 			ft_putendl_fd("map error", STDERR_FILENO);

@@ -7,24 +7,28 @@ SOURCES = srcs/bsq.c \
 		  srcs/bsq_free_grid.c \
 		  srcs/bsq_parse_grid.c \
 		  srcs/bsq_parse_header.c \
-		  srcs/utils/ft_min.c \
-		  srcs/validate_input.c
+		  srcs/bsq_validation.c \
+		  srcs/utils/ft_min.c
 INCLUDE_DIR = includes/
-LIBS = libs/libft_fileio/libft_fileio.a \
+INCLUDES = $(INCLUDE_DIR)/ft.h \
+		   $(INCLUDE_DIR)/ft_buffer.h \
+		   $(INCLUDE_DIR)/ft_fileio.h \
+		   $(INCLUDE_DIR)/bsq.h
+LIBS = libs/libft/libft.a \
 	   libs/libft_buffer/libft_buffer.a \
-	   libs/libft/libft.a
+	   libs/libft_fileio/libft_fileio.a \
 
 .PHONY: all re fclean clean libs
 
 all: libs $(NAME)
 
-$(NAME): $(SOURCES) $(LIBS)
-	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $^
+$(NAME): $(SOURCES) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $(SOURCES) $(LIBS)
 
 libs:
 	for lib in $(LIBS); do $(MAKE) -C $$(dirname $$lib); done
 
-$(SOURCES) $(LIBS):
+$(SOURCES) $(INCLUDES) $(LIBS):
 
 re: fclean all
 

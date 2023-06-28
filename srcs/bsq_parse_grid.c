@@ -6,19 +6,20 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:32:32 by sliashko          #+#    #+#             */
-/*   Updated: 2023/06/28 11:28:34 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:56:51 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 #include <stdlib.h>
 
-//Take the content
-//and create an empty matrix for problem solving
-
-// The function creates a convinient matrix for solving
-// we replace obstacle char with 0 and empty with 1 (ints)
-// This will allow us treat the problem as finding biggest sqr
+/** Parse multiple-line string into grid.
+ * @param content the string.
+ * @param n_lines number of lines
+ * @param len_of_line number of characters per line (exclude newline).
+ * @param markers look-up table for marker characters.
+ * @return grid object with all properties.
+*/
 t_grid	*bsq_parse_grid(char *content,
 		int n_lines, int len_of_line, t_marker markers)
 {
