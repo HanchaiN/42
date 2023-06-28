@@ -69,7 +69,6 @@ static int	_main_parse(int fileno)
 		return (1);
 	str = ft_read_line(fileno);
 	m = bsq_parse_header(str, &marker);
-	printf("empty = %c, obst = %c, full = %c\n", marker.empty, marker.obstacle, marker.full);
 	free(str);
 	if (m <= 0 || !check_duplicates(marker))
 		return (1);

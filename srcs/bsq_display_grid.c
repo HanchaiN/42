@@ -31,8 +31,8 @@ void	bsq_display_grid(const t_grid *grid, const t_square *square,
 		while (j < grid->n)
 		{
 			if (square
-				&& square->x0 < j && j - 1 <= square->x1
-				&& square->y0 < i && i - 1 <= square->y1)
+				&& square->x0 - 1 <= j && j <= square->x1 - 1
+				&& square->y0 - 1 <= i && i <= square->y1 - 1)
 				ft_putchar(marker.full);
 			else if (grid->value[i][j])
 				ft_putchar(marker.empty);
