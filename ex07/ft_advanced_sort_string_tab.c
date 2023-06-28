@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_advanced_sort_string_tab.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hnonpras <hnonpras@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 16:46:12 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/22 14:32:45 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 14:11:53 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 	int		swapped;
 
 	swapped = 1;
-	curr = tab;
 	while (swapped)
 	{
 		swapped = 0;
+		curr = tab;
 		while (*curr)
 		{
 			if ((*cmp)(*tab, *curr) > 0)
