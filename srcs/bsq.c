@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:49:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 11:27:50 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:54:48 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	_main(int fileno)
 	str = ft_read_line(fileno);
 	m = bsq_parse_header(str, &marker);
 	free(str);
-	if (m <= 0)
+	if (m <= 0 || !check_duplicates(marker))
 		return (1);
 	n = _read_lines(&str, fileno, m);
 	if (n <= 0 || !check_matrix_chars(str, marker))
