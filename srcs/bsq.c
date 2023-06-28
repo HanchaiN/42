@@ -34,8 +34,6 @@ int	main()
 }
 */
 
-
-
 static int	_main(int fileno)
 {
 	char		*str;
@@ -49,6 +47,10 @@ static int	_main(int fileno)
 	grid.m = ft_atoi(str);
 	marker = bsq_parse_header_markers(str);
 	free(str);
+	str = ft_read_line(fileno);
+	grid.n = len_line(str);
+	content = malloc(...);
+	read(fileno, content, ...);
 	// TODO: Validate and parse the rest of the file.
 	square = bsq_find_largest_square(&grid);
 	bsq_display_grid(&grid, square, marker);
