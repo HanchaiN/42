@@ -12,21 +12,31 @@
 
 #include "bsq.h"
 
-/** Extract the markers from the header line
- * @param header header line
-*/
+// Count len of single line till \n
+int	ft_len_line(char *header)
+{
+	int	len;
 
-//Take only 3 last chars
+	len = 0;
+	while (*header != '\n' && *header != '\0')
+	{
+		header++;
+		len++;
+	}
+	return (len);
+}
+
+// Extract the chars for empty,obstacle and full
+// It takes last 3 chars before new line
 t_marker	bsq_parse_header_markers(char *header)
 {
 	t_marker	markers;
+	int			len;
+	int			i;
 
-	while (ft_isdigit(*header))
-		header++;
-	markers.empty = *header;
-	header++;
-	markers.obstacle = *header;
-	header++;
-	markers.full = *header;
+	len = ft_len_line(header);
+	markers.empty = header[len - 3];
+	markers.obstacle = header[len - 2];
+	markers.full = header[len - 1];
 	return (markers);
 }
