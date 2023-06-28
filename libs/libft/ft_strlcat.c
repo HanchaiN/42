@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsq_parse_header.c                                 :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 14:21:25 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 09:22:30 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/11 13:36:47 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/28 08:58:48 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#include "ft.h"
+#include <stdlib.h>
 
-/** Extract the markers from the header line
- * @param header header line
-*/
-t_marker	bsq_parse_header_markers(char *header)
+size_t	ft_strlcat(char *dest, char *src, size_t size)
 {
-	t_marker	markers;
+	size_t	count;
 
-	while (ft_isdigit(*header))
-		header++;
-	markers.empty = *header;
-	header++;
-	markers.obstacle = *header;
-	header++;
-	markers.full = *header;
-	return (markers);
+	count = 0;
+	while (*dest != '\0')
+	{
+		dest++;
+		count++;
+	}
+	if (count > size)
+		count = size;
+	while (*src != '\0')
+	{
+		if (count + 1 < size)
+		{
+			*dest = *src;
+			dest++;
+			*dest = '\0';
+		}
+		src++;
+		count++;
+	}
+	return (count);
 }

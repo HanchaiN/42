@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 12:52:30 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 16:09:59 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 08:58:45 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 int		ft_isdigit(char ch);
 int		ft_isspace(char ch);
 int		ft_strlen(char *str);
+size_t	ft_strlcpy(char *dest, char *src, size_t size);
+size_t	ft_strlcat(char *dest, char *src, size_t size);
 int		ft_atoi(char *str);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(char *src);

@@ -14,6 +14,8 @@ SOURCES = ft_atoi.c \
 		  ft_putstr_fd.c \
 		  ft_putstr.c \
 		  ft_strdup.c \
+		  ft_strlcat.c \
+		  ft_strlcpy.c \
 		  ft_strlen.c \
 		  ft_strtrim.c
 INCLUDE_DIR = ../../includes/

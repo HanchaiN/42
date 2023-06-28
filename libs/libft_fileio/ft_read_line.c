@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:14:07 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 10:14:17 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 08:55:16 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ char	*ft_read_line(int fileno)
 	if (read_count <= 0)
 		return (NULL);
 	buffer = ft_buffer_new(1);
-	while (read_count > 0 && ch != '\n')
+	while (read_count > 0)
 	{
 		ft_buffer_putchar(ch, buffer);
+		if (ch == '\n')
+			break ;
 		read_count = read(fileno, &ch, 1);
 	}
 	str = ft_buffer_strdup(buffer);
