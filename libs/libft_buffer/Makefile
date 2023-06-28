@@ -12,6 +12,8 @@ SOURCES = ft_buffer_extend.c \
 		  ft_buffer_putstrn.c \
 		  ft_buffer_strdup.c
 INCLUDE_DIR = ../../includes/
+INCLUDES = $(INCLUDE_DIR)/ft.h \
+		   $(INCLUDE_DIR)/ft_buffer.h
 LIBS = ../libft/libft.a
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -22,10 +24,10 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $^
+%.o: %.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $<
 
-$(SOURCES) $(LIBS):
+$(SOURCES) $(INCLUDES) $(LIBS):
 
 re: fclean all
 

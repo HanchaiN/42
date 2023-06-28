@@ -19,6 +19,7 @@ SOURCES = ft_atoi.c \
 		  ft_strlen.c \
 		  ft_strtrim.c
 INCLUDE_DIR = ../../includes/
+INCLUDES = $(INCLUDE_DIR)/ft.h
 OBJECTS = $(SOURCES:.c=.o)
 
 .PHONY: all re fclean clean
@@ -28,10 +29,10 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c
-	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $^
+%.o: %.c $(INCLUDES)
+	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $<
 
-$(SOURCES) $(LIBS):
+$(SOURCES) $(INCLUDES):
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:54:46 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 11:34:28 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 12:50:49 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static size_t	_get_index(size_t i, size_t j, size_t n)
 
 /** Find the biggest square avoiding obstacles.
  * @return coordinate of the square malloc(3)ed by the call;
- * `NULL` if no such square exists.
+ * `NULL` if none exists.
 */
 t_square	*bsq_find_largest_square(const t_grid *grid)
 {
