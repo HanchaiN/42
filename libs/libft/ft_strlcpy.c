@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsq_parse_header.c                                 :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 14:21:25 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 09:22:30 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/10 18:19:13 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/06/28 08:58:53 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "bsq.h"
+#include "ft.h"
+#include <stdlib.h>
 
-/** Extract the markers from the header line
- * @param header header line
-*/
-
-//Take only 3 last chars
-t_marker	bsq_parse_header_markers(char *header)
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
-	t_marker	markers;
+	size_t	count;
 
-	while (ft_isdigit(*header))
-		header++;
-	markers.empty = *header;
-	header++;
-	markers.obstacle = *header;
-	header++;
-	markers.full = *header;
-	return (markers);
+	count = 0;
+	while (*src != '\0')
+	{
+		if (count + 1 < size)
+		{
+			*dest = *src;
+			dest++;
+		}
+		count++;
+		src++;
+	}
+	if (size > 0)
+		*dest = '\0';
+	return (count);
 }
