@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bsq_parse_header.c                                 :+:      :+:    :+:   */
+/*   bsq_free_grid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 14:21:25 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 11:28:59 by hnonpras         ###   ########.fr       */
+/*   Created: 2023/06/26 15:32:32 by sliashko          #+#    #+#             */
+/*   Updated: 2023/06/28 11:28:25 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bsq.h"
 
-// Extract the chars for empty,obstacle and full
-// It takes last 3 chars before new line
-int	bsq_parse_header(char *header, t_marker *marker)
+void	bsq_free_grid(t_grid *grid)
 {
-	int			len;
-	int			n;
+	unsigned int	i;
 
-	len = ft_strlen(header);
-	if (header[len - 1] == '\n')
-		len--;
-	if (len < 4)
-		return (-1);
-	marker->empty = header[len - 3];
-	marker->obstacle = header[len - 2];
-	marker->full = header[len - 1];
-	header[len - 3] = 0;
-	n = ft_atoi(header);
-	return (n);
+	i = 0;
+	while (i < grid->m)
+	{
+		free(grid->value[i]);
+		i++;
+	}
+	free(grid->value);
+	free(grid);
 }

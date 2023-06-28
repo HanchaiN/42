@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 11:53:39 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/27 14:25:21 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/28 11:35:34 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	bsq_display_grid(const t_grid *grid, const t_square *square,
 		while (j < grid->n)
 		{
 			if (square
-				&& square->x0 <= j && j <= square->x1
-				&& square->y0 <= i && i <= square->y1)
+				&& square->x0 < j && j - 1 <= square->x1
+				&& square->y0 < i && i - 1 <= square->y1)
 				ft_putchar(marker.full);
 			else if (grid->value[i][j])
 				ft_putchar(marker.empty);

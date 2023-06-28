@@ -4,6 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 SOURCES = srcs/bsq.c \
 		  srcs/bsq_display_grid.c \
 		  srcs/bsq_find_largest_square.c \
+		  srcs/bsq_free_grid.c \
+		  srcs/bsq_parse_grid.c \
 		  srcs/bsq_parse_header.c \
 		  srcs/utils/ft_min.c \
 		  srcs/validate_input.c
