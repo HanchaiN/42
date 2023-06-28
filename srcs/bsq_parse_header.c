@@ -46,7 +46,6 @@ int	check_extra_chars(char *header)
 	return (i == len - 3);
 }
 
-
 int	bsq_parse_header(char *header, t_marker *marker)
 {
 	int	len;
