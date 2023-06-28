@@ -56,6 +56,15 @@ int	check_shape(char *matr, int m, int n)
 	}
 	return (count_lines == m);
 }
-// Check structure marker for duplicatingc chars
 
-//
+// Check structure marker for duplicatingc chars
+int	check_duplicates(t_marker marker)
+{
+	if (marker.empty == marker.obstacle)
+		return (0);
+	if (marker.empty == marker.full)
+		return (0);
+	if (marker.obstacle == marker.full)
+		return (0);
+	return (1);
+}

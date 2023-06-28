@@ -79,7 +79,7 @@ static int	_main(int fileno)
 	if (m <= 0)
 		return (1);
 	n = _read_lines(&str, fileno, m);
-	if (n <= 0)
+	if (n <= 0 || !check_matrix_chars(str, marker))
 	{
 		free(str);
 		return (1);
