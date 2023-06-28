@@ -27,11 +27,8 @@ int	ft_lenline(char *str)
 	int	len;
 
 	len = 0;
-	while (*str != '\n' && *str != '\0')
-	{
+	while (str[len] != '\n' && str[len] != '\0')
 		len++;
-		str++;
-	}
 	return (len);
 }
 
@@ -44,13 +41,9 @@ int	check_extra_chars(char *header)
 	len = ft_lenline(header);
 	if (!ft_isdigit(header[i]))
 		return (0);
-	while (ft_isdigit(header[i]) && header[i] != header[len - 3])
-	{
+	while (ft_isdigit(header[i]) && i != len - 3)
 		i++;
-	}
-	return (header[i] == header[len - 3]
-		&& header[i + 1] == header[len - 2]
-		&& header[i + 2] == header[len - 1]);
+	return (i == len - 3);
 }
 
 
@@ -62,9 +55,7 @@ int	bsq_parse_header(char *header, t_marker *marker)
 	len = ft_strlen(header);
 	if (header[len - 1] == '\n')
 		len--;
-	if (len < 4)
-		return (-1);
-	if (!check_extra_chars(header))
+	if (len < 4 || !check_extra_chars(header))
 		return (-1);
 	marker->empty = header[len - 3];
 	marker->obstacle = header[len - 2];
