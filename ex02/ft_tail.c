@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 15:44:37 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 11:44:13 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	_main(int argc, char **argv, int byte_count, char *program_name)
 	int	status;
 	int	ret;
 	int	i;
+	int	j;
 
 	if (argc == 0)
 	{
@@ -31,13 +32,15 @@ int	_main(int argc, char **argv, int byte_count, char *program_name)
 	}
 	ret = 0;
 	i = 0;
+	j = 0;
 	while (i < argc)
 	{
-		status = ft_tail_file(argv[i], byte_count, argc != 1);
-		ret |= (status > 0);
+		status = ft_tail_file(argv[i], byte_count,
+				argc != 1, j != 0);
+		if (status == 0)
+			j++;
+		ret |= (status != 0);
 		ft_display_error_errno(program_name, argv[i], status);
-		if (i + 1 != argc && status <= 0)
-			ft_putstr("\n", STDOUT_FILENO);
 		i++;
 	}
 	return (ret);

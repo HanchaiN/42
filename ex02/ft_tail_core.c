@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 09:47:49 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 13:59:04 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 10:09:36 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_tail(int fileno, int byte_count)
 	return (0);
 }
 
-int	ft_tail_file(char *pathname, int byte_count, int show_header)
+int	ft_tail_file(char *pathname, int byte_count, int show_header, int flush)
 {
 	int	fileno;
 	int	status;
@@ -52,7 +52,7 @@ int	ft_tail_file(char *pathname, int byte_count, int show_header)
 	if (fileno < 0)
 		return (errno);
 	if (show_header)
-		ft_display_header(pathname);
+		ft_display_header(pathname, flush);
 	status = ft_tail(fileno, byte_count);
 	close(fileno);
 	return (status);

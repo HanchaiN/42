@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:01:06 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/29 09:55:23 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 12:31:37 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ int	_read(int *fileno, char *buffer, unsigned long long *ptr)
 	if (read_count > 0)
 		*ptr += read_count;
 	else
+	{
+		if (*fileno > 2)
+			close(*fileno);
 		*fileno = -1;
+	}
 	if (read_count < 0)
 		return (errno);
 	return (0);
@@ -57,7 +61,7 @@ int	_read_and_update(unsigned long long *ptr,
 	if (*ptr % 16 || *is_printed)
 	{
 		_read(fileno, buffer, ptr);
-		*is_printed &= (fileno < 0);
+		*is_printed &= *fileno < 0;
 		return (0);
 	}
 	*is_printed = 1;
@@ -90,7 +94,8 @@ int	ft_hexdump(char **argv, char *program_name,
 	{
 		if (fileno < 0)
 			ret |= _get_fileno(&argv, program_name, &fileno);
-		if (fileno > 0 && _read_and_update(&ptr, &is_printed, buffer, &fileno))
+		if (fileno != -2
+			&& _read_and_update(&ptr, &is_printed, buffer, &fileno))
 			(*format)(ptr, 16, buffer);
 	}
 	if (!is_printed && ptr % 16)
