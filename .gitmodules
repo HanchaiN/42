@@ -1,0 +1,3 @@
+[submodule "mini-moulinette"]
+	path = mini-moulinette
+	url = https://github.com/HanchaiN/mini-moulinette.git
