@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 11:49:22 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/28 13:08:39 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 15:17:12 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ int	main(int argc, char **argv)
 		}
 		close(fileno);
 		argv++;
+		if (*argv)
+			ft_putchar('\n');
 	}
 	return (ret);
 }
