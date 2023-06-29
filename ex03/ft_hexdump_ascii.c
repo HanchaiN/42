@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:02:32 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 19:32:23 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:53:19 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	_format_ascii_ascii(int count, char *buffer)
 
 void	ft_format_ascii(unsigned long long index, int count, char *buffer)
 {
-	ft_write_hex(index - count, 7, STDOUT_FILENO);
+	ft_write_hex(index - count, 8, STDOUT_FILENO);
 	_format_ascii_hex(count, buffer);
 	ft_putstr("  |", STDOUT_FILENO);
 	_format_ascii_ascii(count, buffer);

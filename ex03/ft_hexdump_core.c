@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 19:01:06 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 19:27:48 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:55:23 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,15 @@ int	_read_and_update(unsigned long long *ptr,
 	return (1);
 }
 
-void	_format_footer(unsigned long long ptr)
+void	_format_footer(unsigned long long ptr, int is_ascii)
 {
-	ft_write_hex(ptr, 7, STDOUT_FILENO);
+	ft_write_hex(ptr, 7 + (is_ascii != 0), STDOUT_FILENO);
 	ft_putchar('\n', STDOUT_FILENO);
 }
 
 int	ft_hexdump(char **argv, char *program_name,
-		void (*format)(unsigned long long, int, char *))
+		void (*format)(unsigned long long, int, char *),
+		int is_ascii)
 {
 	int					fileno;
 	char				buffer[16];
@@ -95,6 +96,6 @@ int	ft_hexdump(char **argv, char *program_name,
 	if (!is_printed && ptr % 16)
 		(*format)(ptr, ptr % 16, buffer);
 	if (ptr)
-		_format_footer(ptr);
+		_format_footer(ptr, is_ascii);
 	return (ret);
 }

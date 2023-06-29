@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 16:45:33 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/06/24 19:07:44 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/06/29 09:55:39 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_format_error(char *program_name, char *pathname, int status);
 void	ft_format_ascii(unsigned long long index, int count, char *buffer);
 void	ft_format_hex(unsigned long long index, int count, char *buffer);
 int		ft_hexdump(char **argv, char *program_name,
-			void (*format)(unsigned long long, int, char *));
+			void (*format)(unsigned long long, int, char *),
+			int is_ascii);
 
 #endif
