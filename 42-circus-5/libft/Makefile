@@ -57,7 +57,7 @@ OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 
 all: $(NAME)
 
-bonus: $(NAME) $(OBJECTS_BONUS)
+bonus: $(OBJECTS) $(OBJECTS_BONUS)
 	$(AR) $(ARFLAGS) $(NAME) $^
 
 $(NAME): $(OBJECTS)

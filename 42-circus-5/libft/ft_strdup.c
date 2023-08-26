@@ -6,12 +6,11 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:43:55 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/22 18:43:56 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/08/27 10:53:36 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strdup(const char *s)
 {
