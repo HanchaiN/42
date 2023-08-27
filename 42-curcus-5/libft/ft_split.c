@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:43:51 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/27 10:50:16 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/08/27 18:41:58 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**ft_split(const char *s, char c)
 	char	**ret;
 	char	**curr;
 
-	ret = (char **)malloc((split_count(s, c) + 1) * sizeof(char *));
+	ret = malloc((split_count(s, c) + 1) * sizeof(char *));
 	if (!ret)
 		return (ret);
 	curr = ret;
