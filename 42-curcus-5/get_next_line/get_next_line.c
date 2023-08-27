@@ -6,87 +6,96 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:27:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/27 16:46:32 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:07:10 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-static void	strjoin_realloc_clear(char **s1, char *s2, size_t s2len)
+static ssize_t	gnl_read_append(int fd, char **buffer, char **endl)
 {
-	char	*temp;
+	ssize_t	read_size;
+	char	*buff;
 
-	if (*s1 == NULL)
+	*endl = ft_strchr(*buffer, '\n');
+	if (*endl)
+		return (1);
+	read_size = ft_strlen(*buffer);
+	*buffer = ft_realloc_inc(*buffer, read_size + BUFFER_SIZE + 1, read_size);
+	buff = *buffer + read_size;
+	if (!*buffer)
 	{
-		ft_bzero(s2, s2len * sizeof(char));
-		return ;
+		*endl = NULL;
+		return (-1);
 	}
-	temp = *s1;
-	*s1 = (char *)malloc((ft_strlen(temp) + s2len + 1) * sizeof(char));
-	if (*s1)
-	{
-		ft_memmove(*s1, temp, ft_strlen(temp));
-		ft_memmove(*s1 + ft_strlen(temp), s2, s2len);
-		ft_bzero(s2, s2len * sizeof(char));
-		(*s1)[ft_strlen(temp) + s2len] = '\0';
-	}
-	free(temp);
+	read_size = read(fd, buff, BUFFER_SIZE);
+	if (read_size < 0)
+		free(*buffer);
+	if (read_size < 0)
+		*buffer = NULL;
+	if (read_size >= 0)
+		buff[read_size] = '\0';
+	*endl = ft_strchr(*buffer, '\n');
+	if (!*endl)
+		*endl = &buff[read_size - 1];
+	return (read_size);
 }
 
-static void	memshift(void *block, ssize_t shift, size_t block_size)
-{
-	ft_memmove(block, block + shift, block_size - shift);
-	ft_bzero((void *)(block + block_size - shift), shift);
-}
-
-static size_t	strlen_lim(char *str, size_t maxlen)
-{
-	char	*end;
-
-	end = ft_memchr(str, '\0', maxlen);
-	if (!end)
-		return (maxlen);
-	return (end - str);
-}
-
-static void	get_next_line_(int fd, char **line, char *buffer)
+static void	get_next_line_io(int fd, char **line, char **buffer)
 {
 	char	*endl;
 	ssize_t	read_size;
 
-	read_size = strlen_lim(buffer, BUFFER_SIZE);
 	while (1)
 	{
-		if (buffer[0] == '\0')
+		read_size = gnl_read_append(fd, buffer, &endl);
+		if (read_size < 0 || (read_size == 0 && *buffer[0] == '\0'))
 		{
-			read_size = read(fd, buffer, BUFFER_SIZE);
-			if (read_size == 0 && (*line)[0])
-				return ;
-			if (read_size <= 0)
-			{
-				free(*line);
-				*line = NULL;
-				return ;
-			}
+			free(*line);
+			*line = NULL;
+			return ;
 		}
-		endl = ft_memchr(buffer, '\n', (size_t)read_size);
-		if (endl)
+		if ((endl && endl >= *buffer && *endl == '\n') || read_size == 0)
 			break ;
-		strjoin_realloc_clear(line, buffer, (size_t)read_size);
 	}
-	strjoin_realloc_clear(line, buffer, endl - buffer + 1);
-	memshift(buffer, endl - buffer + 1, BUFFER_SIZE * sizeof(char));
+	read_size = ft_strlen(*line);
+	*line = ft_realloc_inc(*line, read_size + endl - *buffer + 2, read_size);
+	if (!*line)
+		return ;
+	ft_memmove(*line + read_size, *buffer, endl - *buffer + 1);
+	(*line)[read_size + endl - *buffer + 1] = '\0';
+	*buffer = ft_memmove(*buffer, endl + 1, ft_strlen(endl + 1) + 1);
+}
+
+static char	**gnl_get_buffer(int fd)
+{
+	static char	*buffer[OPEN_MAX];
+
+	if (fd < 0 || fd >= OPEN_MAX)
+		return (NULL);
+	return (&buffer[fd]);
+}
+
+void	gnl_clear_buffer(int fd)
+{
+	char	**buffer;
+
+	if (fd < 0 || fd >= OPEN_MAX)
+		return ;
+	buffer = gnl_get_buffer(fd);
+	free(*buffer);
+	*buffer = NULL;
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[OPEN_MAX][BUFFER_SIZE];
-	char		*line;
+	char	*line[1];
 
 	if (fd < 0 || fd >= OPEN_MAX)
 		return (NULL);
-	line = get_empty_string();
-	get_next_line_(fd, &line, buffer[fd]);
-	return (line);
+	line[0] = NULL;
+	get_next_line_io(fd, &line[0], gnl_get_buffer(fd));
+	if (!line[0])
+		gnl_clear_buffer(fd);
+	return (line[0]);
 }

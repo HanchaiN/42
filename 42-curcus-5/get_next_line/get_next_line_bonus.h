@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:22:44 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/27 15:55:02 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:08:25 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 # endif
 
 size_t	ft_strlen(const char *s);
-void	ft_bzero(void *s, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-void	*ft_memchr(const void *s, int c, size_t n);
-char	*get_empty_string(void);
+void	*ft_realloc_inc(void *ptr, size_t n, size_t cpy_n);
+char	*ft_strchr(const char *s, int c);
+void	gnl_clear_buffer(int fd);
 char	*get_next_line(int fd);
 
 #endif

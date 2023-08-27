@@ -6,36 +6,36 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:42:10 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/27 16:39:49 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/08/28 01:08:45 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	size_t				i;
+	unsigned const char	*src_;
+	unsigned char		*dst_;
 
 	if (dest == src)
 		return (dest);
+	src_ = (unsigned const char *)src;
+	dst_ = (unsigned char *)dest;
 	if (dest < src)
 	{
 		i = 0;
 		while (i < n)
 		{
-			*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
+			dst_[i] = src_[i];
 			i++;
 		}
 	}
 	else
 	{
-		i = 0;
-		while (i < n)
-		{
-			*(unsigned char *)(dest + n - i - 1)
-				= *(unsigned char *)(src + n - i - 1);
-			i++;
-		}
+		i = n;
+		while (i--)
+			dst_[i] = src_[i];
 	}
 	return (dest);
 }
@@ -45,43 +45,36 @@ size_t	ft_strlen(const char *s)
 	size_t	len;
 
 	len = 0;
-	while (s[len])
+	while (s && s[len])
 		len++;
 	return (len);
 }
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strchr(const char *s, int c)
 {
-	size_t	i;
+	size_t				i;
+	unsigned const char	*s_;
+	unsigned char		c_;
 
+	s_ = (unsigned const char *)s;
+	c_ = (unsigned char)c;
 	i = 0;
-	while (i < n)
+	while (s_ && s_[i] != '\0')
 	{
-		if (*(unsigned char *)(s + i) == (unsigned char)c)
-			return ((void *)(s + i));
+		if (s_[i] == c_)
+			return ((char *)(s + i));
 		i++;
 	}
 	return (NULL);
 }
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_realloc_inc(void *ptr, size_t n, size_t cpy_n)
 {
-	void	*ptr;
+	void	*temp;
 
-	ptr = s;
-	while ((size_t)(ptr - s) < n)
-	{
-		*(unsigned char *)ptr = 0;
-		ptr++;
-	}
-}
-
-char	*get_empty_string(void)
-{
-	char	*str;
-
-	str = (char *)malloc(1 * sizeof(char));
-	if (str)
-		*str = '\0';
-	return (str);
+	temp = malloc(n);
+	if (ptr)
+		ft_memmove(temp, ptr, cpy_n);
+	free(ptr);
+	return (temp);
 }
