@@ -2,6 +2,14 @@
 	"folders": [
 		{
 			"path": ".."
+		},
+		{
+			"name": "CPiscine",
+			"path": "../c-piscine-12"
+		},
+		{
+			"name": "42curcus",
+			"path": "../42-curcus-5"
 		}
 	],
 	"settings": {
