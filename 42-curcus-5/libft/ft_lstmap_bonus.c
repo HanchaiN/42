@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 18:43:46 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/25 15:59:33 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/09/03 18:27:41 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	void	*content;
 
 	res = NULL;
+	if (!f)
+		return (res);
 	while (lst)
 	{
 		content = f(lst->content);
@@ -27,7 +29,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		if (!new)
 		{
 			ft_lstclear(&res, del);
-			del(content);
+			if (del)
+				del(content);
 			return (res);
 		}
 		ft_lstadd_back(&res, new);
