@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   conversion_p.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/26 18:39:17 by hnonpras          #+#    #+#             */
+/*   Updated: 2023/09/10 15:07:49 by hnonpras         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+#include "libft/libft.h"
+#include <stdarg.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+static size_t	get_length(size_t n)
+{
+	if (n >= 16)
+		return (get_length(n / 16) + 1);
+	else
+		return (1);
+}
+
+static char	*putnbr_buffer(size_t n, char *buff)
+{
+	const char lookup[16] = "0123456789abcdef";
+	if (n >= 16)
+	{
+		buff = putnbr_buffer(n / 16, buff);
+		buff = putnbr_buffer(n % 16, buff);
+	}
+	else
+		*(buff++) = lookup[n];
+	return (buff);
+}
+
+static char	*itoa_sizet(size_t n)
+{
+	char	*buff;
+
+	buff = malloc((get_length(n) + 1) * sizeof(char));
+	if (!buff)
+		return (buff);
+	*putnbr_buffer(n, buff) = '\0';
+	return (buff);
+}
+
+int	printf_conversion_p(va_list ap)
+{
+	char	*str;
+	int		len;
+
+	str = itoa_sizet((size_t)va_arg(ap, void *));
+	ft_putstr_fd("0x", STDOUT_FILENO);
+	ft_putstr_fd(str, STDOUT_FILENO);
+	len = ft_strlen(str) + 2;
+	free(str);
+	return (len);
+}
