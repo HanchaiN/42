@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -L ./libft -lft
+CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = -crsT
 SOURCES = \
