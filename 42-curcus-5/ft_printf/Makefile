@@ -1,9 +1,5 @@
 NAME = libftprintf.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar
-ARFLAGS = -crsT
-SOURCES = \
+SRC = \
 	conversion/conversion_c.c \
 	conversion/conversion_s.c \
 	conversion/conversion_p.c \
@@ -14,36 +10,43 @@ SOURCES = \
 	conversion/conversion_x_upper.c \
 	conversion/conversion.c \
 	ft_printf.c
-INCLUDE_DIR = .
-INCLUDES = \
-	$(INCLUDE_DIR)/ft_printf.h \
-	$(INCLUDE_DIR)/conversion/conversion.h \
-	$(INCLUDE_DIR)/libft/libft.h
-LIBS = \
-	libft/libft.a
-OBJECTS = $(SOURCES:.c=.o)
+OBJ = $(SRC:.c=.o)
+
+INC_DIR = includes
+INC = \
+	ft_printf.h \
+	$(INCLUDE_DIR)/conversion.h
+
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I . -I $(INC_DIR) -I $(LIBFT_DIR)
+
+AR = ar
+ARFLAGS = -crsT
 
 .PHONY: all re fclean clean
 
 all: $(NAME)
 
-$(NAME): $(LIBS) $(OBJECTS)
+$(NAME): $(OBJ) $(LIBFT)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c $(INCLUDES) $(LIBS)
-	$(CC) -c $(CFLAGS) -I $(INCLUDE_DIR) -o $@ $<
+%.o: %.c $(LIBFT) $(INC)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(LIBS):
-	$(MAKE) -C $$(dirname $@)
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
 
-$(SOURCES) $(INCLUDES):
-
-re: fclean all
-
-fclean: clean
-	for lib in $(LIBS); do $(MAKE) -C $$(dirname $$lib) fclean; done
-	rm -f $(NAME)
+$(SRC) $(INC):
 
 clean:
-	for lib in $(LIBS); do $(MAKE) -C $$(dirname $$lib) clean; done
-	rm -f $(OBJECTS)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	rm -f $(OBJ)
+
+fclean: clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	rm -f $(NAME)
+
+re: fclean all

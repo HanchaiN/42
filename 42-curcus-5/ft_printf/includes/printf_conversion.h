@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion.h                                       :+:      :+:    :+:   */
+/*   printf_conversion.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 16:39:58 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/26 22:52:04 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/14 13:08:52 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERSION_H
-# define CONVERSION_H
+#ifndef PRINTF_CONVERSION_H
+# define PRINTF_CONVERSION_H
 # include <stdarg.h>
 
 int	printf_conversion_c(va_list ap);

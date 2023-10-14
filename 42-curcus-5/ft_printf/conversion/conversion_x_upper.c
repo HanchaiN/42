@@ -6,12 +6,12 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/14 11:42:42 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/14 14:45:14 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "libft/libft.h"
+#include "libft.h"
+#include "printf_conversion.h"
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
