@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/09/10 15:07:49 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/14 11:42:23 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static size_t	get_length(size_t n)
 
 static char	*putnbr_buffer(size_t n, char *buff)
 {
-	const char lookup[16] = "0123456789abcdef";
+	const char	lookup[16] = "0123456789abcdef";
+
 	if (n >= 16)
 	{
 		buff = putnbr_buffer(n / 16, buff);

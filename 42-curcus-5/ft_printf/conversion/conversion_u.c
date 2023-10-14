@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/09/10 15:08:16 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/14 11:42:35 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static size_t	get_length(unsigned int n)
 
 static char	*putnbr_buffer(unsigned int n, char *buff)
 {
-	const char lookup[10] = "0123456789";
+	const char	lookup[10] = "0123456789";
+
 	if (n >= 10)
 	{
 		buff = putnbr_buffer(n / 10, buff);
