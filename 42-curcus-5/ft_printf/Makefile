@@ -15,7 +15,7 @@ OBJ = $(SRC:.c=.o)
 INC_DIR = includes
 INC = \
 	ft_printf.h \
-	$(INCLUDE_DIR)/conversion.h
+	$(INC_DIR)/printf_conversion.h
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -24,7 +24,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I . -I $(INC_DIR) -I $(LIBFT_DIR)
 
 AR = ar
-ARFLAGS = -crsT
+ARFLAGS = -crs
 
 .PHONY: all re fclean clean
 
@@ -33,7 +33,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT)
 	$(AR) $(ARFLAGS) $@ $^
 
-%.o: %.c $(LIBFT) $(INC)
+%.o: %.c $(INC)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(LIBFT):
