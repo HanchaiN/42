@@ -6,133 +6,116 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:27:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/21 18:14:04 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/22 01:27:14 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static t_gnl_list	*gnl_get_buffer(int fd)
+static void	gnl_append_block(t_gnl_state *state, t_gnl_block *block)
 {
-	static t_gnl_list	*list;
-	t_gnl_list			*current;
-
-	current = list;
-	while (current)
-	{
-		if (current->fd == fd)
-			return (current);
-		current = current->next;
-	}
-	current = malloc(sizeof(t_gnl_list));
-	if (!current)
-		return (NULL);
-	current->fd = fd;
-	current->buff = NULL;
-	current->next = list;
-	list = current;
-	return (current);
+	if (state->end_block)
+		state->end_block->next = block;
+	else
+		state->begin_block = block;
+	state->end_block = block;
+	block->next = NULL;
 }
 
-static void	*ft_memcpy(void *dest, const void *src, size_t n)
+static int	gnl_read_block(t_gnl_state *state)
 {
-	size_t				i;
-	unsigned const char	*src_;
-	unsigned char		*dst_;
+	t_gnl_block	*block;
+	ssize_t		i;
 
-	if (dest == src)
-		return (dest);
-	src_ = (unsigned const char *)src;
-	dst_ = (unsigned char *)dest;
+	block = malloc(sizeof(t_gnl_block));
+	if (!block)
+		return (0b10);
+	block->len = read(state->fd, block->buffer, BUFFER_SIZE);
+	if (block->len <= 0)
+	{
+		free(block);
+		return (0b10);
+	}
+	gnl_append_block(state, block);
 	i = 0;
-	while (i < n)
+	while (i < block->len)
 	{
-		dst_[i] = src_[i];
+		state->len++;
+		if (block->buffer[i] == '\n')
+			return (0b01);
 		i++;
 	}
-	return (dest);
+	return (0b00);
 }
 
-static int	gnl_append(char **line, int *len, t_gnl_list *node)
+static char	*gnl_extract_line(t_gnl_state *state)
 {
-	char	*new_line;
-	int		i;
+	char		*line;
+	ssize_t		i;
+	t_gnl_block	*temp;
 
-	i = node->start;
-	while (i + 1 < node->len && node->buff[i] != '\n')
-		i++;
-	new_line = malloc((*len + i - node->start + 1) * sizeof(char));
-	if (!new_line)
-	{
-		free(*line);
-		*line = NULL;
-		return (-1);
-	}
-	ft_memcpy(new_line, *line, *len);
-	ft_memcpy(new_line + *len, node->buff + node->start, i - node->start + 1);
-	new_line[*len + i - node->start + 1] = '\0';
-	free(*line);
-	*line = new_line;
-	*len += i - node->start + 1;
-	node->start = i + 1;
-	if (node->start >= node->len)
-		free(node->buff);
-	if (node->start >= node->len)
-		node->buff = NULL;
-	return ((*line)[*len - 1] == '\n');
-}
-
-static char	*gnl_read_line(t_gnl_list *node)
-{
-	char	*line;
-	int		len;
-
-	line = malloc(1 * sizeof(char));
+	line = malloc(sizeof(char) * (state->len + 1));
 	if (!line)
 		return (NULL);
-	line[0] = '\0';
-	len = 0;
-	while (1)
+	i = 0;
+	while (i < state->len)
 	{
-		if (node->buff == NULL)
+		line[i] = state->begin_block->buffer[state->offset];
+		state->offset++;
+		i++;
+		if (state->offset == state->begin_block->len)
 		{
-			node->start = 0;
-			node->buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-			if (!node->buff)
-				return (NULL);
-			node->len = read(node->fd, node->buff, BUFFER_SIZE);
-			if (node->len <= 0)
-			{
-				if (node->len < 0 || len == 0)
-				{
-					free(line);
-					line = NULL;
-				}
-				free(node->buff);
-				node->buff = NULL;
-				return (line);
-			}
-			else
-				node->buff[node->len] = '\0';
+			state->offset = 0;
+			temp = state->begin_block;
+			if (state->begin_block == state->end_block)
+				state->end_block = NULL;
+			state->begin_block = state->begin_block->next;
+			free(temp);
 		}
-		if (node->len == 0 || gnl_append(&line, &len, node))
-			return (line);
 	}
+	line[i] = '\0';
+	return (line);
+}
+
+static int	gnl_update_state(t_gnl_state *state)
+{
+	ssize_t	i;
+
+	state->status &= 0b10;
+	if (!state->end_block)
+	{
+		state->len = 0;
+		return (state->status & 0b10);
+	}
+	i = state->offset;
+	while (i < state->end_block->len)
+	{
+		i++;
+		if (state->end_block->buffer[i - 1] == '\n')
+			break ;
+	}
+	state->len = i - state->offset;
+	state->status |= state->end_block->buffer[i - 1] == '\n';
+	return (!state->begin_block && state->status & 0b10);
 }
 
 char	*get_next_line(int fd)
 {
-	t_gnl_list	*current;
+	t_gnl_state	*state;
 	char		*line;
 
-	current = gnl_get_buffer(fd);
-	if (!current)
+	state = gnl_get_state(fd);
+	if (!state || (!state->begin_block && state->status & 0b10))
 		return (NULL);
-	line = gnl_read_line(current);
-	if (!line)
+	while (state->status == 0b00)
+		state->status |= gnl_read_block(state);
+	line = gnl_extract_line(state);
+	if (gnl_update_state(state))
+		gnl_clear_state(state);
+	if (line[0] == '\0')
 	{
-		free(current->buff);
-		current->buff = NULL;
+		free(line);
+		return (NULL);
 	}
 	return (line);
 }
