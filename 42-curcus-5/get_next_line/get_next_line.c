@@ -6,96 +6,124 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:27:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/08/28 01:07:10 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/21 18:12:51 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static ssize_t	gnl_read_append(int fd, char **buffer, char **endl)
+static t_gnl_list	*gnl_get_buffer(int fd)
 {
-	ssize_t	read_size;
-	char	*buff;
+	static t_gnl_list	*list;
+	t_gnl_list			*current;
 
-	*endl = ft_strchr(*buffer, '\n');
-	if (*endl)
-		return (1);
-	read_size = ft_strlen(*buffer);
-	*buffer = ft_realloc_inc(*buffer, read_size + BUFFER_SIZE + 1, read_size);
-	buff = *buffer + read_size;
-	if (!*buffer)
+	current = list;
+	while (current)
 	{
-		*endl = NULL;
+		if (current->fd == fd)
+			return (current);
+		current = current->next;
+	}
+	current = malloc(sizeof(t_gnl_list));
+	if (!current)
+		return (NULL);
+	current->fd = fd;
+	current->buff = NULL;
+	current->next = list;
+	list = current;
+	return (current);
+}
+
+static void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t				i;
+	unsigned const char	*src_;
+	unsigned char		*dst_;
+
+	if (dest == src)
+		return (dest);
+	src_ = (unsigned const char *)src;
+	dst_ = (unsigned char *)dest;
+	i = 0;
+	while (i < n)
+	{
+		dst_[i] = src_[i];
+		i++;
+	}
+	return (dest);
+}
+
+static int	gnl_append(char **line, int *len, t_gnl_list *node)
+{
+	char	*new_line;
+	int		i;
+
+	i = node->start;
+	while (i < node->len && node->buff[i] != '\n')
+		i++;
+	new_line = malloc((*len + i - node->start + 2) * sizeof(char));
+	if (!new_line)
+	{
+		free(*line);
+		*line = NULL;
 		return (-1);
 	}
-	read_size = read(fd, buff, BUFFER_SIZE);
-	if (read_size < 0)
-		free(*buffer);
-	if (read_size < 0)
-		*buffer = NULL;
-	if (read_size >= 0)
-		buff[read_size] = '\0';
-	*endl = ft_strchr(*buffer, '\n');
-	if (!*endl)
-		*endl = &buff[read_size - 1];
-	return (read_size);
+	ft_memcpy(new_line, *line, *len);
+	ft_memcpy(new_line + *len, node->buff, i - node->start + 1);
+	new_line[*len + i - node->start] = '\0';
+	free(*line);
+	*line = new_line;
+	*len += i - node->start;
+	node->start = i + 1;
+	if (node->start == node->len)
+		free(node->buff);
+	if (node->start == node->len)
+		node->buff = NULL;
+	return (0);
 }
 
-static void	get_next_line_io(int fd, char **line, char **buffer)
+static char	*gnl_read_line(t_gnl_list *node)
 {
-	char	*endl;
-	ssize_t	read_size;
+	char	*line;
+	int		len;
 
+	line = malloc(1 * sizeof(char));
+	if (!line)
+		return (NULL);
+	line[0] = '\0';
+	len = 0;
 	while (1)
 	{
-		read_size = gnl_read_append(fd, buffer, &endl);
-		if (read_size < 0 || (read_size == 0 && *buffer[0] == '\0'))
+		if (node->buff == NULL)
 		{
-			free(*line);
-			*line = NULL;
-			return ;
+			node->start = 0;
+			node->buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+			if (!node->buff)
+				return (NULL);
+			node->len = read(node->fd, node->buff, BUFFER_SIZE);
+			if (node->len < 0)
+				free(line);
+			if (node->len < 0)
+				return (NULL);
 		}
-		if ((endl && endl >= *buffer && *endl == '\n') || read_size == 0)
-			break ;
+		if (gnl_append(&line, &len, node) || node->buff[node->start] == '\n')
+			return (line);
 	}
-	read_size = ft_strlen(*line);
-	*line = ft_realloc_inc(*line, read_size + endl - *buffer + 2, read_size);
-	if (!*line)
-		return ;
-	ft_memmove(*line + read_size, *buffer, endl - *buffer + 1);
-	(*line)[read_size + endl - *buffer + 1] = '\0';
-	*buffer = ft_memmove(*buffer, endl + 1, ft_strlen(endl + 1) + 1);
-}
-
-static char	**gnl_get_buffer(int fd)
-{
-	static char	*buffer[OPEN_MAX];
-
-	if (fd < 0 || fd >= OPEN_MAX)
-		return (NULL);
-	return (&buffer[fd]);
-}
-
-void	gnl_clear_buffer(int fd)
-{
-	char	**buffer;
-
-	if (fd < 0 || fd >= OPEN_MAX)
-		return ;
-	buffer = gnl_get_buffer(fd);
-	free(*buffer);
-	*buffer = NULL;
 }
 
 char	*get_next_line(int fd)
 {
-	char	*line[1];
+	t_gnl_list	*current;
+	char		*line;
 
-	if (fd < 0 || fd >= OPEN_MAX)
+	current = gnl_get_buffer(fd);
+	if (!current)
 		return (NULL);
-	line[0] = NULL;
-	get_next_line_io(fd, &line[0], gnl_get_buffer(fd));
-	if (!line[0])
-		gnl_clear_buffer(fd);
-	return (line[0]);
+	line = gnl_read_line(current);
+	if (!line)
+	{
+		free(current->buff);
+		current->buff = NULL;
+	}
+	return (line);
 }
