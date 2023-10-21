@@ -59,9 +59,9 @@ static int	gnl_append(char **line, int *len, t_gnl_list *node)
 	int		i;
 
 	i = node->start;
-	while (i < node->len && node->buff[i] != '\n')
+	while (i + 1 < node->len && node->buff[i] != '\n')
 		i++;
-	new_line = malloc((*len + i - node->start + 2) * sizeof(char));
+	new_line = malloc((*len + i - node->start + 1) * sizeof(char));
 	if (!new_line)
 	{
 		free(*line);
@@ -69,17 +69,17 @@ static int	gnl_append(char **line, int *len, t_gnl_list *node)
 		return (-1);
 	}
 	ft_memcpy(new_line, *line, *len);
-	ft_memcpy(new_line + *len, node->buff, i - node->start + 1);
-	new_line[*len + i - node->start] = '\0';
+	ft_memcpy(new_line + *len, node->buff + node->start, i - node->start + 1);
+	new_line[*len + i - node->start + 1] = '\0';
 	free(*line);
 	*line = new_line;
-	*len += i - node->start;
+	*len += i - node->start + 1;
 	node->start = i + 1;
-	if (node->start == node->len)
+	if (node->start >= node->len)
 		free(node->buff);
-	if (node->start == node->len)
+	if (node->start >= node->len)
 		node->buff = NULL;
-	return (0);
+	return ((*line)[*len - 1] == '\n');
 }
 
 static char	*gnl_read_line(t_gnl_list *node)
@@ -101,12 +101,21 @@ static char	*gnl_read_line(t_gnl_list *node)
 			if (!node->buff)
 				return (NULL);
 			node->len = read(node->fd, node->buff, BUFFER_SIZE);
-			if (node->len < 0)
-				free(line);
-			if (node->len < 0)
-				return (NULL);
+			if (node->len <= 0)
+			{
+				if (node->len < 0 || len == 0)
+				{
+					free(line);
+					line = NULL;
+				}
+				free(node->buff);
+				node->buff = NULL;
+				return (line);
+			}
+			else
+				node->buff[node->len] = '\0';
 		}
-		if (gnl_append(&line, &len, node) || node->buff[node->start] == '\n')
+		if (node->len == 0 || gnl_append(&line, &len, node))
 			return (line);
 	}
 }
