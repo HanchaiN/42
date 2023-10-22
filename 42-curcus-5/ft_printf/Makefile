@@ -12,19 +12,20 @@ SRC = \
 	ft_printf.c
 OBJ = $(SRC:.c=.o)
 
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 INC_DIR = includes
 INC = \
 	ft_printf.h \
-	$(INC_DIR)/printf_conversion.h
-
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+	$(INC_DIR)/printf_conversion.h \
+	$(LIBFT_DIR)/libft.h
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I . -I $(INC_DIR) -I $(LIBFT_DIR)
 
 AR = ar
-ARFLAGS = -crs
+ARFLAGS = -crsT
 
 .PHONY: all re fclean clean
 
