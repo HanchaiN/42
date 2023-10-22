@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:39:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/22 01:32:39 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/14 13:09:08 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,10 @@ static char	*itoa_sizet(size_t n)
 
 int	printf_conversion_p(va_list ap)
 {
-	void	*val;
 	char	*str;
 	int		len;
 
-	val = va_arg(ap, void *);
-	if (val == NULL)
-	{
-		ft_putstr_fd("(nil)", STDOUT_FILENO);
-		return (5);
-	}
-	str = itoa_sizet((size_t)val);
+	str = itoa_sizet((size_t)va_arg(ap, void *));
 	ft_putstr_fd("0x", STDOUT_FILENO);
 	ft_putstr_fd(str, STDOUT_FILENO);
 	len = ft_strlen(str) + 2;
