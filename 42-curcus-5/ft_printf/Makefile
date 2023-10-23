@@ -25,20 +25,19 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -I . -I $(INC_DIR) -I $(LIBFT_DIR)
 
 AR = ar
-ARFLAGS = -crsT
+ARFLAGS = -crs
 
 .PHONY: all re fclean clean
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ)
+	$(MAKE) -C $(LIBFT_DIR)
+	cp $(LIBFT) $(NAME)
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o: %.c $(INC)
 	$(CC) $(CFLAGS) -c -o $@ $<
-
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
 
 $(SRC) $(INC):
 
