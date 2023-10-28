@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:27:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/22 01:27:07 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:23:21 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,13 @@ static t_gnl_status	gnl_read_block(t_gnl_state *state)
 	block = malloc(sizeof(t_gnl_block));
 	if (!block)
 		return (0b010);
-	block->len = read(state->fd, block->buffer, BUFFER_SIZE);
-	if (block->len <= 0)
+	i = read(state->fd, block->buffer, BUFFER_SIZE);
+	if (i <= 0)
 	{
 		free(block);
-		if (block->len == 0)
-			return (IS_ENDF);
-		return (IS_ERROR);
+		return ((i < 0) * (IS_ERROR) | (i == 0) * (IS_ENDF));
 	}
+	block->len = i;
 	gnl_append_block(state, block);
 	i = 0;
 	while (i < block->len)
@@ -79,7 +78,7 @@ static char	*gnl_extract_line(t_gnl_state *state)
 	return (line);
 }
 
-static void	gnl_update_state(t_gnl_state *state)
+static int	gnl_update_state(t_gnl_state *state)
 {
 	ssize_t	i;
 
@@ -87,7 +86,7 @@ static void	gnl_update_state(t_gnl_state *state)
 	if (!state->end_block)
 	{
 		state->len = 0;
-		return ;
+		return (state->status & IS_ENDF);
 	}
 	i = state->offset;
 	while (i < state->end_block->len)
@@ -98,7 +97,7 @@ static void	gnl_update_state(t_gnl_state *state)
 	}
 	state->len = i - state->offset;
 	state->status |= IS_ENDL * (state->end_block->buffer[i - 1] == '\n');
-	return ;
+	return (!state->end_block && state->status & IS_ENDF);
 }
 
 char	*get_next_line(int fd)
@@ -111,12 +110,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (state->status == 0)
 		state->status |= gnl_read_block(state);
-	if (state->status & (IS_ERROR | IS_ENDF))
+	if ((state->status & IS_ERROR) || (!state->end_block
+			&& state->status & IS_ENDF))
 	{
 		gnl_clear_state(state);
 		return (NULL);
 	}
 	line = gnl_extract_line(state);
-	gnl_update_state(state);
+	if (gnl_update_state(state))
+		gnl_clear_state(state);
 	return (line);
 }

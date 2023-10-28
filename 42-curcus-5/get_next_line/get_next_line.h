@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:22:44 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/22 01:22:10 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:10:56 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef enum e_gnl_status
 	IS_ENDL = 1 << 0,
 	IS_ERROR = 1 << 1,
 	IS_ENDF = 1 << 2,
-} t_gnl_status;
+}						t_gnl_status;
 
 typedef struct s_gnl_block
 {

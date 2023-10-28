@@ -6,7 +6,7 @@
 /*   By: hnonpras <hnonpras@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 10:27:17 by hnonpras          #+#    #+#             */
-/*   Updated: 2023/10/22 01:27:14 by hnonpras         ###   ########.fr       */
+/*   Updated: 2023/10/28 11:24:14 by hnonpras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,31 @@ static void	gnl_append_block(t_gnl_state *state, t_gnl_block *block)
 	block->next = NULL;
 }
 
-static int	gnl_read_block(t_gnl_state *state)
+static t_gnl_status	gnl_read_block(t_gnl_state *state)
 {
 	t_gnl_block	*block;
 	ssize_t		i;
 
 	block = malloc(sizeof(t_gnl_block));
 	if (!block)
-		return (0b10);
-	block->len = read(state->fd, block->buffer, BUFFER_SIZE);
-	if (block->len <= 0)
+		return (0b010);
+	i = read(state->fd, block->buffer, BUFFER_SIZE);
+	if (i <= 0)
 	{
 		free(block);
-		return (0b10);
+		return ((i < 0) * (IS_ERROR) | (i == 0) * (IS_ENDF));
 	}
+	block->len = i;
 	gnl_append_block(state, block);
 	i = 0;
 	while (i < block->len)
 	{
 		state->len++;
 		if (block->buffer[i] == '\n')
-			return (0b01);
+			return (IS_ENDL);
 		i++;
 	}
-	return (0b00);
+	return (0);
 }
 
 static char	*gnl_extract_line(t_gnl_state *state)
@@ -81,11 +82,11 @@ static int	gnl_update_state(t_gnl_state *state)
 {
 	ssize_t	i;
 
-	state->status &= 0b10;
+	state->status &= ~IS_ENDL;
 	if (!state->end_block)
 	{
 		state->len = 0;
-		return (state->status & 0b10);
+		return (state->status & IS_ENDF);
 	}
 	i = state->offset;
 	while (i < state->end_block->len)
@@ -95,8 +96,8 @@ static int	gnl_update_state(t_gnl_state *state)
 			break ;
 	}
 	state->len = i - state->offset;
-	state->status |= state->end_block->buffer[i - 1] == '\n';
-	return (!state->begin_block && state->status & 0b10);
+	state->status |= IS_ENDL * (state->end_block->buffer[i - 1] == '\n');
+	return (!state->end_block && state->status & IS_ENDF);
 }
 
 char	*get_next_line(int fd)
@@ -105,17 +106,18 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	state = gnl_get_state(fd);
-	if (!state || (!state->begin_block && state->status & 0b10))
+	if (!state)
 		return (NULL);
-	while (state->status == 0b00)
+	while (state->status == 0)
 		state->status |= gnl_read_block(state);
+	if ((state->status & IS_ERROR) || (!state->end_block
+			&& state->status & IS_ENDF))
+	{
+		gnl_clear_state(state);
+		return (NULL);
+	}
 	line = gnl_extract_line(state);
 	if (gnl_update_state(state))
 		gnl_clear_state(state);
-	if (line[0] == '\0')
-	{
-		free(line);
-		return (NULL);
-	}
 	return (line);
 }
