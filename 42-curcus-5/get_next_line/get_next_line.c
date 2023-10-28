@@ -22,19 +22,21 @@ static void	gnl_append_block(t_gnl_state *state, t_gnl_block *block)
 	block->next = NULL;
 }
 
-static int	gnl_read_block(t_gnl_state *state)
+static t_gnl_status	gnl_read_block(t_gnl_state *state)
 {
 	t_gnl_block	*block;
 	ssize_t		i;
 
 	block = malloc(sizeof(t_gnl_block));
 	if (!block)
-		return (0b10);
+		return (0b010);
 	block->len = read(state->fd, block->buffer, BUFFER_SIZE);
 	if (block->len <= 0)
 	{
 		free(block);
-		return (0b10);
+		if (block->len == 0)
+			return (IS_ENDF);
+		return (IS_ERROR);
 	}
 	gnl_append_block(state, block);
 	i = 0;
@@ -42,10 +44,10 @@ static int	gnl_read_block(t_gnl_state *state)
 	{
 		state->len++;
 		if (block->buffer[i] == '\n')
-			return (0b01);
+			return (IS_ENDL);
 		i++;
 	}
-	return (0b00);
+	return (0);
 }
 
 static char	*gnl_extract_line(t_gnl_state *state)
@@ -77,15 +79,15 @@ static char	*gnl_extract_line(t_gnl_state *state)
 	return (line);
 }
 
-static int	gnl_update_state(t_gnl_state *state)
+static void	gnl_update_state(t_gnl_state *state)
 {
 	ssize_t	i;
 
-	state->status &= 0b10;
+	state->status &= ~IS_ENDL;
 	if (!state->end_block)
 	{
 		state->len = 0;
-		return (state->status & 0b10);
+		return ;
 	}
 	i = state->offset;
 	while (i < state->end_block->len)
@@ -95,8 +97,8 @@ static int	gnl_update_state(t_gnl_state *state)
 			break ;
 	}
 	state->len = i - state->offset;
-	state->status |= state->end_block->buffer[i - 1] == '\n';
-	return (!state->begin_block && state->status & 0b10);
+	state->status |= IS_ENDL * (state->end_block->buffer[i - 1] == '\n');
+	return ;
 }
 
 char	*get_next_line(int fd)
@@ -105,17 +107,16 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	state = gnl_get_state(fd);
-	if (!state || (!state->begin_block && state->status & 0b10))
+	if (!state)
 		return (NULL);
-	while (state->status == 0b00)
+	while (state->status == 0)
 		state->status |= gnl_read_block(state);
-	line = gnl_extract_line(state);
-	if (gnl_update_state(state))
-		gnl_clear_state(state);
-	if (line[0] == '\0')
+	if (state->status & (IS_ERROR | IS_ENDF))
 	{
-		free(line);
+		gnl_clear_state(state);
 		return (NULL);
 	}
+	line = gnl_extract_line(state);
+	gnl_update_state(state);
 	return (line);
 }
